@@ -2,7 +2,6 @@
   <div class="w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary-container opacity-70"></div>
 
   @if (mascota(); as m) {
-    <!-- Migas de pan -->
     <section class="w-full bg-surface-container-lowest">
       <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-sm flex items-center justify-between text-body-sm">
         <nav aria-label="Ruta de navegación" class="flex items-center gap-space-xs flex-wrap font-label-md text-label-md">
@@ -30,10 +29,7 @@
     <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-lg md:py-space-xl">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-start">
 
-        <!-- Columna izquierda -->
         <section class="lg:col-span-7 flex flex-col gap-space-xl">
-
-          <!-- Galería -->
           <article class="flex flex-col gap-space-md">
             <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container-high shadow-md group">
               <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -86,7 +82,6 @@
             }
           </article>
 
-          <!-- Encabezado -->
           <article class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-sm">
             <div class="flex flex-wrap items-center justify-between gap-space-sm">
               <div class="flex items-center gap-space-sm flex-wrap">
@@ -109,7 +104,6 @@
             </div>
           </article>
 
-          <!-- Ficha técnica -->
           <section aria-labelledby="key-specs" class="flex flex-col gap-space-sm">
             <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="key-specs">
               <span class="material-symbols-outlined text-primary">badge</span>
@@ -128,7 +122,6 @@
             </div>
           </section>
 
-          <!-- Salud -->
           <section aria-labelledby="health-heading" class="flex flex-col gap-space-sm">
             <div class="flex items-center justify-between gap-space-sm flex-wrap">
               <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="health-heading">
@@ -152,7 +145,6 @@
             </div>
           </section>
 
-          <!-- Temperamento -->
           <section aria-labelledby="temperament-heading" class="flex flex-col gap-space-sm">
             <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="temperament-heading">
               <span class="material-symbols-outlined text-primary">sentiment_very_satisfied</span>
@@ -173,7 +165,6 @@
             </div>
           </section>
 
-          <!-- Historia -->
           <article class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
             <div class="flex items-center gap-space-xs text-primary font-label-lg text-label-lg">
               <span class="material-symbols-outlined text-2xl">auto_stories</span>
@@ -193,7 +184,6 @@
             </div>
           </article>
 
-          <!-- Requisitos -->
           <section aria-labelledby="req-heading" class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
             <div class="flex items-center justify-between gap-space-sm flex-wrap">
               <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="req-heading">
@@ -216,10 +206,8 @@
           </section>
         </section>
 
-        <!-- Columna derecha -->
         <aside class="lg:col-span-5 flex flex-col gap-space-lg lg:sticky lg:top-24">
 
-          <!-- Tarjeta de adopción -->
           <div class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col gap-space-md">
             <div class="flex items-center justify-between gap-space-sm flex-wrap">
               <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary font-label-md text-label-md px-3.5 py-1.5 rounded-full">
@@ -266,7 +254,7 @@
             </div>
           </div>
 
-          <!-- Refugio -->
+
           @if (refugio(); as r) {
             <article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
               <div class="flex items-start gap-space-md">
@@ -319,7 +307,6 @@
             </article>
           }
 
-          <!-- Preguntas frecuentes -->
           <article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
             <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs">
               <span class="material-symbols-outlined text-primary">quiz</span>
@@ -341,7 +328,6 @@
       </div>
     </div>
 
-    <!-- Mascotas similares -->
     <section class="w-full bg-surface-container-low py-space-xl mt-space-xl">
       <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col gap-space-lg">
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm">
@@ -393,7 +379,7 @@
       </div>
     </section>
 
-    <!-- Modal de solicitud -->
+
     @if (modalAbierto()) {
       <div class="fixed inset-0 z-[60] flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm p-margin"
         role="dialog" aria-modal="true" aria-labelledby="modal-titulo" (click)="cerrarModal()">
@@ -479,7 +465,7 @@
       </div>
     }
   } @else {
-    <!-- Mascota no encontrada -->
+
     <section class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-margin-lg flex flex-col items-center text-center gap-space-md min-h-[55vh] justify-center">
       <div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center">
         <span class="material-symbols-outlined text-4xl text-primary">search_off</span>
@@ -496,7 +482,6 @@
     </section>
   }
 
-  <!-- Aviso emergente -->
   @if (mensaje()) {
     <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-md w-[92vw] bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-space-lg py-space-md rounded-xl shadow-xl" role="status">
       {{ mensaje() }}

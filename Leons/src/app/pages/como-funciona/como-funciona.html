@@ -1,0 +1,252 @@
+<div class="flex flex-col w-full">
+
+  <!-- Hero -->
+  <section class="relative w-full overflow-hidden bg-surface-container-low">
+    <div class="w-full h-2 bg-gradient-to-r from-primary via-secondary to-primary-container opacity-90"></div>
+    <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-lg lg:py-space-xl relative z-10">
+      <nav aria-label="Migas de pan" class="flex items-center gap-space-xs text-on-surface-variant mb-space-md">
+        <a routerLink="/" class="font-label-sm text-label-sm hover:text-primary transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">home</span>
+          Inicio
+        </a>
+        <span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+        <span class="font-label-sm text-label-sm text-primary font-bold">Cómo funciona</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+        <div class="lg:col-span-7 flex flex-col gap-space-md">
+          <div class="inline-flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-full self-start shadow-sm">
+            <span class="material-symbols-outlined text-secondary text-base" [style.font-variation-settings]="fill1">handshake</span>
+            <span class="font-label-sm text-label-sm text-secondary tracking-wide uppercase font-bold">Adopción transparente y guiada</span>
+          </div>
+
+          <h1 class="font-display text-display text-on-surface tracking-tight leading-tight">
+            Adoptar en Huancayo es
+            <span class="text-primary underline decoration-primary-fixed decoration-wavy decoration-2 underline-offset-4">simple y seguro</span>
+          </h1>
+
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+            En LeonS conectamos familias con refugios y rescatistas del Valle del Mantaro. Te explicamos cada paso,
+            los requisitos y el acompañamiento que recibirás antes y después de la adopción.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+            <a routerLink="/mascotas" class="inline-flex items-center justify-center gap-space-xs font-label-lg text-label-lg text-on-primary bg-primary hover:bg-primary-container px-space-xl py-3.5 rounded-full shadow-md active:scale-95 transition-all min-h-[56px]">
+              <span class="material-symbols-outlined text-xl" [style.font-variation-settings]="fill1">favorite</span>
+              <span>Ver mascotas disponibles</span>
+            </a>
+            <a routerLink="/login" class="inline-flex items-center justify-center gap-space-xs font-label-lg text-label-lg text-secondary bg-surface-container-lowest hover:bg-secondary-container hover:text-on-secondary-container px-space-xl py-3.5 rounded-full shadow-sm active:scale-95 transition-all min-h-[56px]">
+              <span class="material-symbols-outlined text-xl">home_work</span>
+              <span>Soy refugio o rescatista</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="bg-surface-container-lowest rounded-3xl p-space-lg shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-primary-fixed-dim to-secondary"></div>
+            <div class="flex items-center gap-space-sm mb-space-md">
+              <div class="h-12 w-12 rounded-2xl bg-primary-fixed text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl" [style.font-variation-settings]="fill1">verified_user</span>
+              </div>
+              <div>
+                <p class="font-label-lg text-label-lg text-on-surface font-bold">Compromiso LeonS</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Cero comercio de animales</p>
+              </div>
+            </div>
+            <ul class="flex flex-col gap-space-sm">
+              @for (t of ['Adopciones 100% gratuitas', 'Fichas de salud verificadas', 'Seguimiento post-adopción', 'Red de refugios aliados']; track t) {
+                <li class="flex items-center gap-space-sm bg-surface-container-low rounded-xl px-space-md py-3">
+                  <span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                  <span class="font-label-md text-label-md text-on-surface">{{ t }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso del adoptante -->
+  <section class="w-full bg-surface py-margin-md lg:py-margin-lg">
+    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="text-center max-w-2xl mx-auto mb-space-xl">
+        <div class="inline-flex items-center gap-space-xs text-primary mb-2">
+          <span class="material-symbols-outlined text-sm" [style.font-variation-settings]="fill1">volunteer_activism</span>
+          <span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">Para tu familia</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Tu adopción, paso a paso</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+          Un proceso claro, con acompañamiento del refugio en cada etapa y sin cobros indebidos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter-md">
+        @for (p of pasos; track p.titulo; let i = $index) {
+          <div class="bg-surface-container-lowest rounded-3xl p-space-lg shadow-md flex flex-col gap-space-md relative overflow-hidden">
+            <div class="absolute -right-3 -bottom-4 text-surface-container opacity-50 select-none">
+              <span class="font-display text-8xl font-black">{{ i + 1 }}</span>
+            </div>
+            <div class="h-12 w-12 rounded-2xl bg-primary-fixed text-primary flex items-center justify-center relative z-10">
+              <span class="material-symbols-outlined text-2xl">{{ p.icono }}</span>
+            </div>
+            <div class="flex flex-col gap-space-xs relative z-10">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">{{ p.titulo }}</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{{ p.texto }}</p>
+            </div>
+            <div class="mt-auto pt-space-xs flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-bold relative z-10">
+              <span class="material-symbols-outlined text-sm">check_circle</span>
+              <span>{{ p.nota }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Requisitos -->
+  <section class="w-full bg-surface-container-low py-margin-md lg:py-margin-lg">
+    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm mb-space-xl">
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center gap-space-xs text-secondary">
+            <span class="material-symbols-outlined text-sm">fact_check</span>
+            <span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">Antes de postular</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Requisitos de adopción responsable</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">Requisitos mínimos para garantizar el bienestar de la mascota y la familia.</p>
+        </div>
+        <a routerLink="/mascotas" class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:text-primary-container font-bold hover:underline self-start sm:self-auto shrink-0">
+          <span>Ver mascotas</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+        @for (r of requisitos; track r.titulo) {
+          <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex items-start gap-space-md">
+            <div class="h-12 w-12 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-2xl">{{ r.icono }}</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <h3 class="font-label-lg text-label-lg text-on-surface font-bold">{{ r.titulo }}</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{{ r.texto }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso para refugios -->
+  <section class="w-full bg-surface py-margin-md lg:py-margin-lg">
+    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="w-full bg-inverse-surface text-inverse-on-surface rounded-3xl p-space-lg lg:p-space-xl shadow-xl relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary/20 blur-2xl pointer-events-none"></div>
+
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mb-space-xl relative z-10">
+          <div class="flex flex-col gap-1">
+            <p class="font-label-sm text-label-sm text-secondary-fixed uppercase tracking-wider font-bold">Para albergues y rescatistas</p>
+            <h2 class="font-headline-lg text-headline-lg text-white font-bold tracking-tight">Publica y gestiona adopciones gratis</h2>
+            <p class="font-body-md text-body-md text-inverse-on-surface max-w-2xl">
+              LeonS te da visibilidad, fichas completas y filtros de candidatos para encontrar hogares responsables.
+            </p>
+          </div>
+          <a routerLink="/login" class="inline-flex items-center justify-center gap-space-xs font-label-lg text-label-lg text-primary bg-white hover:bg-primary-fixed px-space-xl py-3.5 rounded-full shadow-md transition-all active:scale-95 shrink-0">
+            <span class="material-symbols-outlined text-xl">app_registration</span>
+            <span>Crear cuenta de refugio</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-md relative z-10">
+          @for (p of pasosRefugio; track p.titulo; let i = $index) {
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-space-lg flex flex-col gap-space-sm border border-white/10">
+              <div class="flex items-center gap-space-sm">
+                <div class="h-10 w-10 rounded-xl bg-secondary text-on-secondary flex items-center justify-center font-bold">
+                  {{ i + 1 }}
+                </div>
+                <span class="material-symbols-outlined text-secondary-fixed">{{ p.icono }}</span>
+              </div>
+              <h3 class="font-label-lg text-label-lg text-white font-bold">{{ p.titulo }}</h3>
+              <p class="font-body-sm text-body-sm text-inverse-on-surface leading-relaxed">{{ p.texto }}</p>
+              <span class="font-label-sm text-label-sm text-secondary-fixed font-bold mt-auto">{{ p.nota }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas frecuentes -->
+  <section class="w-full bg-surface-container-low py-margin-md lg:py-margin-lg">
+    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
+        <div class="lg:col-span-5 flex flex-col gap-space-md">
+          <div class="inline-flex items-center gap-space-xs text-secondary self-start">
+            <span class="material-symbols-outlined text-sm">help</span>
+            <span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">Resolvemos tus dudas</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Preguntas frecuentes sobre la adopción</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Si tu pregunta no aparece aquí, escríbenos por WhatsApp y una voluntaria de la red te responderá.
+          </p>
+          <a href="https://wa.me/51964123456?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20adopci%C3%B3n%20en%20LeonS"
+            target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-secondary hover:text-on-secondary-container bg-surface-container-lowest hover:bg-secondary-container px-space-lg py-3 rounded-full transition-all self-start">
+            <span class="material-symbols-outlined text-lg">chat</span>
+            <span>Contactar a LeonS</span>
+          </a>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col gap-space-sm">
+          @for (f of faqs; track f.pregunta; let i = $index) {
+            <div class="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden">
+              <button type="button" (click)="alternarFaq(i)" [attr.aria-expanded]="faqAbierta() === i"
+                class="w-full flex items-center justify-between gap-space-md px-space-lg py-space-md text-left min-h-[56px]">
+                <span class="font-label-lg text-label-lg text-on-surface font-bold">{{ f.pregunta }}</span>
+                <span class="material-symbols-outlined text-primary shrink-0">{{ faqAbierta() === i ? 'remove_circle' : 'add_circle' }}</span>
+              </button>
+              @if (faqAbierta() === i) {
+                <div class="px-space-lg pb-space-md">
+                  <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{{ f.respuesta }}</p>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="w-full bg-surface pb-margin-md lg:pb-margin-lg">
+    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="w-full bg-primary-fixed/30 rounded-3xl p-space-lg lg:p-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
+        <div class="flex items-start sm:items-center gap-space-md">
+          <div class="h-16 w-16 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-md">
+            <span class="material-symbols-outlined text-3xl" [style.font-variation-settings]="fill1">pets</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">¿Listo para dar el siguiente paso?</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+              Explora las mascotas disponibles o crea tu cuenta para acompañar el proceso desde el primer día.
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-space-sm w-full md:w-auto shrink-0">
+          <a routerLink="/mascotas" class="text-center font-label-lg text-label-lg text-on-primary bg-primary hover:bg-primary-container px-space-xl py-3.5 rounded-full shadow-md transition-all active:scale-95">
+            Quiero adoptar
+          </a>
+          <a routerLink="/login" class="text-center font-label-lg text-label-lg text-secondary bg-surface-container-lowest hover:bg-secondary-container px-space-xl py-3.5 rounded-full shadow-sm transition-all active:scale-95">
+            Crear cuenta
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

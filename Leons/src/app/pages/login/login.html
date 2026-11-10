@@ -1,0 +1,372 @@
+<div class="flex flex-col w-full">
+  <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-lg lg:py-space-xl relative">
+
+    <!-- Franja textil andina -->
+    <div class="w-full h-1.5 rounded-full bg-gradient-to-r from-primary via-primary-container to-secondary opacity-90 mb-space-lg"></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-stretch">
+
+      <!-- COLUMNA IZQUIERDA: comunidad y confianza -->
+      <div class="lg:col-span-5 flex flex-col justify-between bg-surface-container-low rounded-[24px] p-space-lg md:p-space-xl shadow-sm relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary-fixed/30 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex flex-col gap-space-md relative z-10">
+          <div class="inline-flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-full self-start">
+            <span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+            <span class="font-label-sm text-label-sm text-secondary tracking-wide uppercase">Red Solidaria Junín</span>
+          </div>
+
+          <div class="flex flex-col gap-space-xs">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+              Cada colita adoptada alegra el Valle del Mantaro.
+            </h1>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Conectamos corazones en Huancayo, El Tambo y Chilca con albergues y rescatistas transparentes. Sin cobros indebidos, con amor genuino.
+            </p>
+          </div>
+
+          <div class="relative w-full h-64 md:h-72 rounded-[20px] overflow-hidden shadow-sm mt-space-xs">
+            <img class="w-full h-full object-cover" alt="Pareja andina abrazando a un perro rescatado y a un gato naranja con el paisaje del Valle del Mantaro al fondo"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzQCbAfeg1g3PPhav_Vu_UST_EeUCzQo3xDhV6aQDvPbMycegjCO_96eqK2msGKQmLPLtuiRDX6ePIFrXxUpO97YM50Yu31re59qY6rl0fmvjtiZkcRCJzE5JKmIccTGusSgK82mDcFnTbf3gm2IvyAaCbWW967QQqKAbDFm64A1UiOa2OoP4CgwUHMfqaVwjPtfs32jRrfudP8tWGQM9mDHTC0r8b_tHbK7At_aCY"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/85 via-inverse-surface/30 to-transparent flex flex-col justify-end p-space-md">
+              <span class="inline-flex items-center gap-space-xs text-inverse-on-surface font-label-sm text-label-sm bg-primary/60 backdrop-blur-md px-3 py-1 rounded-full w-fit">
+                <span class="material-symbols-outlined text-xs">pets</span> Adopción ética en Huancayo
+              </span>
+              <p class="text-inverse-on-surface font-body-sm text-body-sm mt-1">
+                "Chaska encontró un hogar seguro y cálido en El Tambo gracias a LeonS."
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-space-sm mt-space-sm">
+            @for (p of pruebas; track p.titulo) {
+              <div class="flex items-start gap-space-sm p-space-sm rounded-xl bg-surface-container-lowest">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" [class]="p.fondo">
+                  <span class="material-symbols-outlined text-xl" [class]="p.iconoClase" [style.font-variation-settings]="p.relleno ? fill1 : fill0">{{ p.icono }}</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-md text-label-md text-on-surface font-bold">{{ p.titulo }}</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">{{ p.texto }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Testimonio -->
+        <div class="mt-space-md p-space-md bg-surface-container rounded-2xl relative">
+          <div class="flex items-center gap-space-xs text-primary mb-1">
+            @for (e of [1, 2, 3, 4, 5]; track e) {
+              <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            }
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface italic">
+            "Pudimos postular conociendo la historia médica de nuestro perrito. Sin burocracia, con seguimiento por WhatsApp y apoyo de voluntarios de la UNCP."
+          </p>
+          <div class="flex items-center justify-between mt-2 pt-2 text-on-surface-variant font-label-sm text-label-sm">
+            <span class="font-bold text-on-surface">Familia Meza Orihuela</span>
+            <span>Urb. Los Eucaliptos, El Tambo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: formularios -->
+      <div class="lg:col-span-7 bg-surface-container-lowest rounded-[24px] p-space-lg md:p-space-xl shadow-md flex flex-col justify-between">
+        <div>
+
+          <!-- Pestañas -->
+          <div class="w-full bg-surface-container-low p-1.5 rounded-full flex items-center mb-space-lg shadow-inner" role="tablist">
+            <button type="button" role="tab" (click)="cambiarModo('register')" [attr.aria-selected]="modo() === 'register'"
+              class="flex-1 py-3 text-center rounded-full font-label-md text-label-md transition-all min-h-[48px] flex items-center justify-center gap-space-xs"
+              [class]="modo() === 'register' ? 'bg-surface-container-lowest text-primary shadow-sm font-bold' : 'text-on-surface-variant hover:text-on-surface'">
+              <span class="material-symbols-outlined text-lg">person_add</span>
+              <span>Crear Cuenta</span>
+            </button>
+            <button type="button" role="tab" (click)="cambiarModo('login')" [attr.aria-selected]="modo() === 'login'"
+              class="flex-1 py-3 text-center rounded-full font-label-md text-label-md transition-all min-h-[48px] flex items-center justify-center gap-space-xs"
+              [class]="modo() === 'login' ? 'bg-surface-container-lowest text-primary shadow-sm font-bold' : 'text-on-surface-variant hover:text-on-surface'">
+              <span class="material-symbols-outlined text-lg">login</span>
+              <span>Iniciar Sesión</span>
+            </button>
+          </div>
+
+          @if (modo() === 'register') {
+            <!-- CREAR CUENTA -->
+            <div class="flex flex-col gap-space-md">
+              <div>
+                <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Crea tu cuenta en LeonS</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Sé parte del cambio por los animalitos desamparados de Huancayo. Elige cómo deseas participar:
+                </p>
+              </div>
+
+              <!-- Selector de rol -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                <label class="cursor-pointer rounded-2xl p-space-md transition-all flex flex-col justify-between gap-space-sm relative"
+                  [class]="rol() === 'adopter' ? 'bg-primary-fixed/20 shadow-sm' : 'bg-surface-container-low hover:bg-surface-container'">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+                      <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-primary font-bold bg-surface-container-lowest px-2.5 py-1 rounded-full shadow-xs">Adoptante</span>
+                  </div>
+                  <div>
+                    <h3 class="font-label-lg text-label-lg font-bold text-on-surface">Quiero Adoptar</h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
+                      Busco darle un hogar seguro y lleno de cariño a un perro o gato en el valle.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1.5 font-label-sm text-label-sm mt-1" [class]="rol() === 'adopter' ? 'text-primary' : 'text-on-surface-variant'">
+                    <span class="material-symbols-outlined text-base" [class]="rol() === 'adopter' ? 'text-primary' : 'text-outline'">{{ rol() === 'adopter' ? 'check_circle' : 'radio_button_unchecked' }}</span>
+                    <span [class]="rol() === 'adopter' ? 'font-bold' : ''">{{ rol() === 'adopter' ? 'Seleccionado' : 'Elegir rol' }}</span>
+                  </div>
+                  <input type="radio" name="account_role" value="adopter" class="sr-only" [checked]="rol() === 'adopter'" (change)="elegirRol('adopter')"/>
+                </label>
+
+                <label class="cursor-pointer rounded-2xl p-space-md transition-all flex flex-col justify-between gap-space-sm relative"
+                  [class]="rol() === 'shelter' ? 'bg-secondary-container/40 shadow-sm' : 'bg-surface-container-low hover:bg-surface-container'">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-on-secondary">
+                      <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">home_work</span>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-secondary font-bold bg-surface-container-lowest px-2.5 py-1 rounded-full shadow-xs">Rescatista</span>
+                  </div>
+                  <div>
+                    <h3 class="font-label-lg text-label-lg font-bold text-on-surface">Soy Refugio o Rescatista</h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
+                      Publico mascotas, gestiono solicitudes de adopción y coordino con voluntarios.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1.5 font-label-sm text-label-sm mt-1" [class]="rol() === 'shelter' ? 'text-secondary' : 'text-on-surface-variant'">
+                    <span class="material-symbols-outlined text-base" [class]="rol() === 'shelter' ? 'text-secondary' : 'text-outline'">{{ rol() === 'shelter' ? 'check_circle' : 'radio_button_unchecked' }}</span>
+                    <span [class]="rol() === 'shelter' ? 'font-bold' : ''">{{ rol() === 'shelter' ? 'Seleccionado' : 'Elegir rol' }}</span>
+                  </div>
+                  <input type="radio" name="account_role" value="shelter" class="sr-only" [checked]="rol() === 'shelter'" (change)="elegirRol('shelter')"/>
+                </label>
+              </div>
+
+              <!-- Campos de registro -->
+              <form class="flex flex-col gap-space-md mt-space-xs" (submit)="registrar($event)">
+
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="reg-name">
+                    <span>Nombre completo o de la organización</span>
+                    <span class="text-xs text-on-surface-variant font-normal">Requerido</span>
+                  </label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-xl">badge</span>
+                    <input id="reg-name" name="name" type="text" required autocomplete="name" placeholder="Ej. María Mayta Cárdenas / Albergue San Francisco"
+                      class="w-full h-[52px] pl-11 pr-4 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none focus:bg-surface-container-lowest shadow-sm"/>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                  <div class="flex flex-col gap-1">
+                    <label class="font-label-md text-label-md text-on-surface font-semibold" for="reg-email">Correo electrónico</label>
+                    <div class="relative flex items-center">
+                      <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-xl">mail</span>
+                      <input id="reg-email" name="email" type="email" required autocomplete="email" placeholder="tu.correo@ejemplo.com"
+                        class="w-full h-[52px] pl-11 pr-4 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none shadow-sm"/>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="reg-phone">
+                      <span>WhatsApp / Celular</span>
+                      <span class="text-xs text-secondary font-bold">Para coordinar visita</span>
+                    </label>
+                    <div class="relative flex items-center">
+                      <span class="material-symbols-outlined absolute left-3.5 text-secondary text-xl">chat</span>
+                      <input id="reg-phone" name="phone" type="tel" autocomplete="tel" placeholder="+51 964 123 456"
+                        class="w-full h-[52px] pl-11 pr-4 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none shadow-sm"/>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-md text-label-md text-on-surface font-semibold" for="reg-district">Distrito de residencia o sede</label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-xl">location_city</span>
+                    <select id="reg-district" name="district"
+                      class="w-full h-[52px] pl-11 pr-10 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface focus:outline-none shadow-sm appearance-none cursor-pointer">
+                      <option value="" disabled selected>Selecciona tu distrito en Junín...</option>
+                      @for (d of distritos; track d.valor) {
+                        <option [value]="d.valor">{{ d.nombre }}</option>
+                      }
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3.5 text-on-surface-variant pointer-events-none">expand_more</span>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="reg-password">
+                    <span>Contraseña segura</span>
+                    <span class="text-xs text-on-surface-variant font-normal">Mínimo 8 caracteres</span>
+                  </label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-xl">lock</span>
+                    <input #pwd id="reg-password" name="password" [type]="verClaveRegistro() ? 'text' : 'password'" required minlength="8"
+                      autocomplete="new-password" (input)="clave.set(pwd.value)" placeholder="••••••••••••"
+                      class="w-full h-[52px] pl-11 pr-11 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none shadow-sm"/>
+                    <button type="button" (click)="alternarVerClaveRegistro()" aria-label="Ver u ocultar contraseña"
+                      class="absolute right-3.5 text-on-surface-variant hover:text-on-surface p-1">
+                      <span class="material-symbols-outlined text-xl">{{ verClaveRegistro() ? 'visibility_off' : 'visibility' }}</span>
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1.5 rounded-full bg-surface-container overflow-hidden flex">
+                      <div class="h-full transition-all duration-300" [class]="fortaleza().barra"></div>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">{{ fortaleza().texto }}</span>
+                  </div>
+                </div>
+
+                <label class="flex items-start gap-3 mt-1 cursor-pointer select-none">
+                  <input #terminos type="checkbox" name="terms" [checked]="aceptaTerminos()" (change)="aceptaTerminos.set(terminos.checked)"
+                    class="mt-1 w-5 h-5 rounded text-secondary accent-secondary cursor-pointer shrink-0"/>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                    Acepto el
+                    <a routerLink="/como-funciona" class="font-bold text-on-surface hover:underline">Compromiso de Bienestar Animal y Adopción Ética</a>
+                    de LeonS Huancayo, promoviendo esterilización y cuidado responsable.
+                  </span>
+                </label>
+
+                <button type="submit" [disabled]="!aceptaTerminos()"
+                  class="w-full min-h-[56px] bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg rounded-full shadow-md hover:shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-space-xs mt-space-xs font-bold disabled:opacity-60 disabled:cursor-not-allowed">
+                  <span>Crear mi cuenta gratis</span>
+                  <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                </button>
+
+                <div class="flex items-center my-space-xs">
+                  <div class="flex-1 h-px bg-surface-container"></div>
+                  <span class="px-space-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">o regístrate con</span>
+                  <div class="flex-1 h-px bg-surface-container"></div>
+                </div>
+
+                <button type="button" (click)="google()"
+                  class="w-full min-h-[48px] bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-full shadow-xs active:scale-[0.98] transition-all flex items-center justify-center gap-space-sm font-semibold">
+                  <svg aria-hidden="true" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path>
+                    <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.27v3.15C3.25 21.31 7.31 24 12 24z" fill="#34A853"></path>
+                    <path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.27C.46 8.2 0 10.04 0 12s.46 3.8 1.27 5.42l4.01-3.15z" fill="#FBBC05"></path>
+                    <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.69 1.27 6.58l4.01 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+                  </svg>
+                  <span>Continuar con Google</span>
+                </button>
+              </form>
+            </div>
+          } @else {
+            <!-- INICIAR SESIÓN -->
+            <div class="flex flex-col gap-space-md">
+              <div>
+                <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">¡Bienvenido de vuelta a LeonS!</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Ingresa con tu cuenta para revisar tus solicitudes de adopción o administrar las fichas de tus rescatados.
+                </p>
+              </div>
+
+              <form class="flex flex-col gap-space-md mt-space-xs" (submit)="ingresar($event)">
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-md text-label-md text-on-surface font-semibold" for="login-user">Correo electrónico o DNI</label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-xl">account_circle</span>
+                    <input id="login-user" name="username" type="text" required autocomplete="username" placeholder="tu.correo@ejemplo.com o tu DNI"
+                      class="w-full h-[52px] pl-11 pr-4 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none shadow-sm"/>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <div class="flex items-center justify-between">
+                    <label class="font-label-md text-label-md text-on-surface font-semibold" for="login-password">Contraseña</label>
+                    <button type="button" (click)="recuperarClave()" class="font-label-sm text-label-sm text-secondary hover:underline">¿Olvidaste tu contraseña?</button>
+                  </div>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-xl">lock</span>
+                    <input id="login-password" name="password" [type]="verClaveLogin() ? 'text' : 'password'" required autocomplete="current-password" placeholder="••••••••••••"
+                      class="w-full h-[52px] pl-11 pr-11 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none shadow-sm"/>
+                    <button type="button" (click)="alternarVerClaveLogin()" aria-label="Ver u ocultar contraseña"
+                      class="absolute right-3.5 text-on-surface-variant hover:text-on-surface p-1">
+                      <span class="material-symbols-outlined text-xl">{{ verClaveLogin() ? 'visibility_off' : 'visibility' }}</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between select-none">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" name="remember" checked class="w-5 h-5 rounded text-primary accent-primary cursor-pointer"/>
+                    <span class="font-body-sm text-body-sm text-on-surface">Recordar mi sesión en este dispositivo</span>
+                  </label>
+                </div>
+
+                <button type="submit"
+                  class="w-full min-h-[56px] bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg rounded-full shadow-md hover:shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-space-xs mt-space-xs font-bold">
+                  <span>Ingresar a LeonS</span>
+                  <span class="material-symbols-outlined text-xl">login</span>
+                </button>
+
+                <div class="flex items-center my-space-xs">
+                  <div class="flex-1 h-px bg-surface-container"></div>
+                  <span class="px-space-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">o ingresa con</span>
+                  <div class="flex-1 h-px bg-surface-container"></div>
+                </div>
+
+                <button type="button" (click)="google()"
+                  class="w-full min-h-[48px] bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-full shadow-xs active:scale-[0.98] transition-all flex items-center justify-center gap-space-sm font-semibold">
+                  <svg aria-hidden="true" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path>
+                    <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.27v3.15C3.25 21.31 7.31 24 12 24z" fill="#34A853"></path>
+                    <path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.27C.46 8.2 0 10.04 0 12s.46 3.8 1.27 5.42l4.01-3.15z" fill="#FBBC05"></path>
+                    <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.69 1.27 6.58l4.01 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+                  </svg>
+                  <span>Acceder con Google</span>
+                </button>
+
+                <div class="mt-space-sm p-space-md bg-secondary-container/30 rounded-2xl flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary shrink-0">
+                      <span class="material-symbols-outlined text-base">support_agent</span>
+                    </div>
+                    <div class="flex flex-col">
+                      <span class="font-label-sm text-label-sm text-on-surface font-bold">¿Problemas con tu acceso?</span>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant">Soporte voluntario vía WhatsApp</span>
+                    </div>
+                  </div>
+                  <button type="button" (click)="contactarSoporte()" class="font-label-sm text-label-sm text-secondary hover:underline font-bold">Contactar</button>
+                </div>
+              </form>
+            </div>
+          }
+        </div>
+
+        <!-- Nota legal -->
+        <div class="pt-space-md mt-space-md bg-surface-container-low/60 rounded-xl p-space-sm flex items-start gap-space-xs text-on-surface-variant">
+          <span class="material-symbols-outlined text-secondary text-base shrink-0 mt-0.5">verified_user</span>
+          <p class="font-label-sm text-label-sm leading-relaxed">
+            <strong>Compromiso Wanka:</strong> LeonS nunca cobra por registrarse ni por adoptar. Tus datos personales son tratados con estricta confidencialidad bajo la Ley N° 29733 de Protección de Datos Personales del Perú.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bento inferior -->
+    <div class="mt-space-xl grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
+      @for (b of beneficios; track b.titulo) {
+        <div class="bg-surface-container-lowest p-space-lg rounded-[20px] shadow-sm flex items-start gap-space-md">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center shrink-0" [class]="b.fondo + ' ' + b.iconoClase">
+            <span class="material-symbols-outlined text-2xl">{{ b.icono }}</span>
+          </div>
+          <div class="flex flex-col">
+            <h4 class="font-label-lg text-label-lg font-bold text-on-surface">{{ b.titulo }}</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">{{ b.texto }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Aviso emergente -->
+  @if (mensaje()) {
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-md w-[92vw] bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-space-lg py-space-md rounded-xl shadow-xl" role="status" aria-live="polite">
+      {{ mensaje() }}
+    </div>
+  }
+</div>

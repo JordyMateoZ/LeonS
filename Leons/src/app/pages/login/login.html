@@ -1,12 +1,10 @@
 <div class="flex flex-col w-full">
   <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-lg lg:py-space-xl relative">
 
-    <!-- Franja textil andina -->
     <div class="w-full h-1.5 rounded-full bg-gradient-to-r from-primary via-primary-container to-secondary opacity-90 mb-space-lg"></div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-stretch">
 
-      <!-- COLUMNA IZQUIERDA: comunidad y confianza -->
       <div class="lg:col-span-5 flex flex-col justify-between bg-surface-container-low rounded-[24px] p-space-lg md:p-space-xl shadow-sm relative overflow-hidden">
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary-fixed/30 rounded-full blur-2xl pointer-events-none"></div>
 
@@ -52,8 +50,7 @@
             }
           </div>
         </div>
-
-        <!-- Testimonio -->
+        
         <div class="mt-space-md p-space-md bg-surface-container rounded-2xl relative">
           <div class="flex items-center gap-space-xs text-primary mb-1">
             @for (e of [1, 2, 3, 4, 5]; track e) {
@@ -70,11 +67,10 @@
         </div>
       </div>
 
-      <!-- COLUMNA DERECHA: formularios -->
+
       <div class="lg:col-span-7 bg-surface-container-lowest rounded-[24px] p-space-lg md:p-space-xl shadow-md flex flex-col justify-between">
         <div>
 
-          <!-- Pestañas -->
           <div class="w-full bg-surface-container-low p-1.5 rounded-full flex items-center mb-space-lg shadow-inner" role="tablist">
             <button type="button" role="tab" (click)="cambiarModo('register')" [attr.aria-selected]="modo() === 'register'"
               class="flex-1 py-3 text-center rounded-full font-label-md text-label-md transition-all min-h-[48px] flex items-center justify-center gap-space-xs"
@@ -91,7 +87,6 @@
           </div>
 
           @if (modo() === 'register') {
-            <!-- CREAR CUENTA -->
             <div class="flex flex-col gap-space-md">
               <div>
                 <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Crea tu cuenta en LeonS</h2>
@@ -100,7 +95,6 @@
                 </p>
               </div>
 
-              <!-- Selector de rol -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                 <label class="cursor-pointer rounded-2xl p-space-md transition-all flex flex-col justify-between gap-space-sm relative"
                   [class]="rol() === 'adopter' ? 'bg-primary-fixed/20 shadow-sm' : 'bg-surface-container-low hover:bg-surface-container'">
@@ -145,7 +139,6 @@
                 </label>
               </div>
 
-              <!-- Campos de registro -->
               <form class="flex flex-col gap-space-md mt-space-xs" (submit)="registrar($event)">
 
                 <div class="flex flex-col gap-1">
@@ -255,7 +248,6 @@
               </form>
             </div>
           } @else {
-            <!-- INICIAR SESIÓN -->
             <div class="flex flex-col gap-space-md">
               <div>
                 <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">¡Bienvenido de vuelta a LeonS!</h2>
@@ -337,7 +329,6 @@
           }
         </div>
 
-        <!-- Nota legal -->
         <div class="pt-space-md mt-space-md bg-surface-container-low/60 rounded-xl p-space-sm flex items-start gap-space-xs text-on-surface-variant">
           <span class="material-symbols-outlined text-secondary text-base shrink-0 mt-0.5">verified_user</span>
           <p class="font-label-sm text-label-sm leading-relaxed">
@@ -347,7 +338,7 @@
       </div>
     </div>
 
-    <!-- Bento inferior -->
+
     <div class="mt-space-xl grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
       @for (b of beneficios; track b.titulo) {
         <div class="bg-surface-container-lowest p-space-lg rounded-[20px] shadow-sm flex items-start gap-space-md">
@@ -363,7 +354,6 @@
     </div>
   </div>
 
-  <!-- Aviso emergente -->
   @if (mensaje()) {
     <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-md w-[92vw] bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-space-lg py-space-md rounded-xl shadow-xl" role="status" aria-live="polite">
       {{ mensaje() }}

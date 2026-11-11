@@ -20,16 +20,10 @@ export class Impacto {
 
   readonly volunteerNotice = signal(false);
 
-  readonly totalAdoptadas = computed(() =>
-    this.mascotasService.refugios.reduce((total, refugio) => total + refugio.adoptadas, 0),
-  );
+  readonly totalAdoptadas = computed(() => this.mascotasService.totalAdoptadas);
   readonly totalRefugios = computed(() => this.mascotasService.refugios.length);
-  readonly totalEnAcogida = computed(() =>
-    this.mascotasService.refugios.reduce((total, refugio) => total + refugio.enAcogida, 0),
-  );
-  readonly totalDistritos = computed(
-    () => new Set(this.mascotasService.refugios.map((refugio) => refugio.distrito)).size,
-  );
+  readonly totalEnAcogida = computed(() => this.mascotasService.totalEnAcogida);
+  readonly totalDistritos = computed(() => this.mascotasService.totalDistritos);
   readonly totalMascotas = computed(() => this.mascotasService.total);
   readonly totalPerros = computed(
     () => this.mascotasService.mascotas.filter((mascota) => mascota.especie === 'perro').length,

@@ -21,13 +21,9 @@ export class Nosotros {
   readonly activeTab = signal<Tab>('adopters');
   readonly openFaq = signal<number | null>(null);
 
-  readonly totalAdoptadas = computed(() =>
-    this.mascotasService.refugios.reduce((total, refugio) => total + refugio.adoptadas, 0),
-  );
+  readonly totalAdoptadas = computed(() => this.mascotasService.totalAdoptadas);
   readonly totalRefugios = computed(() => this.mascotasService.refugios.length);
-  readonly totalDistritos = computed(
-    () => new Set(this.mascotasService.refugios.map((refugio) => refugio.distrito)).size,
-  );
+  readonly totalDistritos = computed(() => this.mascotasService.totalDistritos);
 
   setTab(tab: Tab) {
     this.activeTab.set(tab);
@@ -71,8 +67,7 @@ export class Nosotros {
       name: 'Lucía Quispe Mayta',
       role: 'Co-fundadora & Coordinadora Veterinaria',
       img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBS8CXa33ltDz-eLtWfhqwQ-CdlbtOKu-wesOhHqGsVUQH3wrN5ZnM6nB0HIAb5JY5HEm0Qrj-38I-TBczgSXKmQg8nrTG4miEua4M5B4DV087vB_V8bCrOTgptmarNV2BP1FnSeGyoDQRUZuMQuAJmW_ZAITcq-9lqwZqky9ehJ54-DwcxlNlbIAX3nZOfOarle0OtT4Ecedc3SemWz1N_5dRWafqJ2fajxP7F0Gpx',
-      imgAlt:
-        'Dra. Lucía Quispe Mayta, Co-fundadora y Coordinadora Veterinaria de LeonS Huancayo',
+      imgAlt: 'Dra. Lucía Quispe Mayta, Co-fundadora y Coordinadora Veterinaria de LeonS Huancayo',
       badgeIcon: 'medication',
       badgeLabel: 'Salud Animal',
       badgeClass: 'bg-secondary text-on-secondary',
@@ -260,8 +255,7 @@ export class Nosotros {
     {
       q: '¿Qué sucede si por una emergencia de fuerza mayor no puedo seguir cuidando a mi mascota?',
       before: 'El acta de adopción responsable estipula que ',
-      bold:
-        'bajo ninguna circunstancia el animal debe ser abandonado, regalado a terceros sin previo aviso ni vendido',
+      bold: 'bajo ninguna circunstancia el animal debe ser abandonado, regalado a terceros sin previo aviso ni vendido',
       after:
         '. El adoptante debe notificar de inmediato a LeonS o al refugio de origen para activar la red de reubicación responsable y brindarle un hogar temporal seguro.',
     },

@@ -1,0 +1,369 @@
+<div class="flex flex-col w-full">
+  <div class="w-full h-2 bg-gradient-to-r from-primary via-primary-container to-secondary"></div>
+
+  @if (refugio(); as r) {
+    <section
+      class="max-w-[1280px] w-full mx-auto px-margin md:px-margin-md lg:px-margin-lg pt-space-xl pb-space-lg"
+    >
+      <nav
+        aria-label="Ruta de navegación"
+        class="flex flex-wrap items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant mb-space-md"
+      >
+        <a routerLink="/" class="hover:text-primary transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">home</span> Inicio
+        </a>
+        <span class="text-outline-variant">/</span>
+        <a routerLink="/refugios" class="hover:text-primary transition-colors">Refugios Aliados</a>
+        <span class="text-outline-variant">/</span>
+        <span class="text-primary font-semibold">{{ r.nombre }}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-stretch">
+        <div
+          class="lg:col-span-7 relative min-h-[320px] rounded-2xl overflow-hidden shadow-md bg-surface-container"
+        >
+          @if (fotoPrincipal()) {
+            <img
+              class="absolute inset-0 w-full h-full object-cover"
+              [src]="fotoPrincipal()"
+              [alt]="'Imagen principal de ' + r.nombre"
+            />
+          }
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-on-surface/20 to-transparent"
+          ></div>
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span
+              class="bg-secondary text-on-secondary px-3 py-1 rounded-full font-label-sm text-label-sm shadow-sm flex items-center gap-1 font-bold"
+            >
+              <span class="material-symbols-outlined text-[16px]">check_circle</span>
+              Verificado LeonS
+            </span>
+            <span
+              class="bg-surface-container-lowest/95 backdrop-blur px-3 py-1 rounded-full font-label-sm text-label-sm shadow-sm font-semibold text-primary"
+            >
+              {{ r.tipo === 'independiente' ? 'Rescatista independiente' : 'Refugio constituido' }}
+            </span>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-space-lg text-on-primary">
+            <h1 class="font-headline-lg text-headline-lg font-bold leading-tight drop-shadow-sm">
+              {{ r.nombre }}
+            </h1>
+            <div class="flex flex-wrap items-center gap-space-md mt-2 font-label-sm text-label-sm">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                {{ r.distrito }}, Huancayo
+              </span>
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                En labor desde {{ r.desde }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-2xl shadow-[0_4px_20px_-4px_rgba(44,62,80,0.08)] flex flex-col gap-space-md"
+        >
+          <div class="flex items-start gap-space-md">
+            <div
+              class="w-16 h-16 rounded-2xl bg-primary/10 overflow-hidden shrink-0 flex items-center justify-center"
+            >
+              @if (r.logo) {
+                <img
+                  class="w-full h-full object-cover"
+                  [alt]="'Logo de ' + r.nombre"
+                  [src]="r.logo"
+                />
+              } @else {
+                <span class="material-symbols-outlined text-3xl text-primary">pets</span>
+              }
+            </div>
+            <div>
+              <p
+                class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider"
+              >
+                Refugio aliado
+              </p>
+              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                {{ r.contacto }}
+              </h2>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">{{ r.cargo }}</p>
+            </div>
+          </div>
+
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            {{ r.descripcion }}
+          </p>
+
+          <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+            <span class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-secondary text-[18px]">home_pin</span>
+              {{ r.direccion }}
+            </span>
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary text-[18px]">call</span>
+              {{ r.telefono }}
+            </span>
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary text-[18px]">pets</span>
+              {{ etiquetaEspecies(r) }}
+            </span>
+          </div>
+
+          <div class="mt-auto flex flex-col gap-space-xs pt-space-xs">
+            <a
+              [href]="whatsappUrl()"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="h-12 bg-secondary text-on-secondary rounded-full font-label-md text-label-md font-bold hover:bg-on-secondary-container transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95"
+            >
+              <span class="material-symbols-outlined text-[20px]">chat</span>
+              Consultar por WhatsApp
+            </a>
+            <a
+              [routerLink]="['/mascotas']"
+              [queryParams]="{ refugio: r.id }"
+              class="h-12 border-2 border-primary text-primary rounded-full font-label-md text-label-md font-bold hover:bg-primary-fixed transition-all flex items-center justify-center gap-2 active:scale-95"
+            >
+              <span class="material-symbols-outlined text-[20px]">favorite</span>
+              Ver mascotas disponibles ({{ resumen().disponibles }})
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="max-w-[1280px] w-full mx-auto px-margin md:px-margin-md lg:px-margin-lg mb-space-xl"
+    >
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter-md">
+        <div
+          class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-primary-fixed text-primary flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[26px]">pets</span>
+          </div>
+          <div>
+            <p class="font-headline-md text-headline-md text-primary font-bold leading-none">
+              {{ resumen().total }}
+            </p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Mascotas asociadas</p>
+          </div>
+        </div>
+        <div
+          class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-secondary-fixed text-secondary flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[26px]">favorite</span>
+          </div>
+          <div>
+            <p class="font-headline-md text-headline-md text-secondary font-bold leading-none">
+              {{ resumen().disponibles }}
+            </p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">
+              Disponibles para adopción
+            </p>
+          </div>
+        </div>
+        <div
+          class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-primary-fixed text-primary flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[26px]">verified</span>
+          </div>
+          <div>
+            <p class="font-headline-md text-headline-md text-primary font-bold leading-none">
+              {{ resumen().adoptadas }}
+            </p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">
+              Adoptadas con seguimiento
+            </p>
+          </div>
+        </div>
+        <div
+          class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[26px]">home</span>
+          </div>
+          <div>
+            <p class="font-headline-md text-headline-md text-on-surface font-bold leading-none">
+              {{ resumen().enAcogida }}
+            </p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">En acogida temporal</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="max-w-[1280px] w-full mx-auto px-margin md:px-margin-md lg:px-margin-lg mb-space-xl"
+    >
+      <div class="flex flex-wrap items-end justify-between gap-space-sm mb-space-md">
+        <div>
+          <div
+            class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold"
+          >
+            <span class="material-symbols-outlined text-[16px]">pets</span>
+            Mascotas del refugio
+          </div>
+          <h2 class="font-headline-md text-headline-md text-on-surface font-bold">
+            Conoce a los rescatados de {{ r.nombre }}
+          </h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            {{ resumen().total }} mascota(s) registradas · {{ resumen().disponibles }} disponible(s)
+            para adopción
+          </p>
+        </div>
+        <a
+          [routerLink]="['/mascotas']"
+          [queryParams]="{ refugio: r.id }"
+          class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-on-secondary-container bg-surface-container-lowest hover:bg-secondary-container px-space-lg py-2.5 rounded-full transition-all"
+        >
+          Ver en el catálogo
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter-md">
+        @for (m of mascotas(); track m.id) {
+          <article
+            class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300"
+          >
+            <div class="relative w-full aspect-[4/3] overflow-hidden bg-surface-container">
+              <img
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                [alt]="m.alt"
+                [src]="m.foto"
+              />
+              <span
+                class="absolute top-3 left-3 px-3 py-1 rounded-full font-label-sm text-label-sm font-bold shadow-sm flex items-center gap-1"
+                [class]="estadoDe(m).clase"
+              >
+                <span class="material-symbols-outlined text-xs">{{ estadoDe(m).icono }}</span>
+                {{ estadoDe(m).etiqueta }}
+              </span>
+            </div>
+
+            <div class="p-space-md flex flex-col flex-1">
+              <div class="flex items-baseline justify-between mb-1">
+                <h3 class="font-headline-md text-headline-md text-on-surface font-bold">
+                  {{ m.nombre }}
+                </h3>
+                <span
+                  class="font-label-sm text-label-sm font-bold px-2 py-0.5 rounded-full"
+                  [class]="m.badgeClase"
+                >
+                  {{ m.generoTexto }}
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 my-2">
+                <span
+                  class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded"
+                  >{{ m.edadTexto }}</span
+                >
+                <span
+                  class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded"
+                  >{{ m.tamanoTexto }}</span
+                >
+                <span
+                  class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded"
+                  >{{ m.sexo }}</span
+                >
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-3">
+                {{ m.descripcion }}
+              </p>
+              <a
+                [routerLink]="['/mascotas', m.id]"
+                class="mt-auto h-11 bg-primary hover:bg-primary-container text-on-primary rounded-full font-label-md text-label-md flex items-center justify-center gap-2 transition-all active:scale-95 shadow-sm"
+              >
+                <span>Conocer a {{ m.nombreCorto }}</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+        } @empty {
+          <div
+            class="col-span-full text-center bg-surface-container-lowest rounded-xl shadow-sm p-space-xl"
+          >
+            <span class="material-symbols-outlined text-4xl text-outline">pets</span>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-space-sm">
+              Este refugio todavía no tiene mascotas publicadas
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Explora el catálogo general o vuelve al listado de refugios aliados.
+            </p>
+            <a
+              routerLink="/mascotas"
+              class="inline-flex items-center gap-2 mt-space-md px-space-lg py-2.5 bg-primary text-on-primary rounded-full font-label-md text-label-md"
+            >
+              Ver todas las mascotas
+            </a>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section
+      class="max-w-[1280px] w-full mx-auto px-margin md:px-margin-md lg:px-margin-lg mb-space-xl"
+    >
+      <div
+        class="bg-surface-container-low rounded-xl p-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-sm">
+          <span class="material-symbols-outlined text-secondary text-2xl">arrow_back</span>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            ¿Quieres conocer otros albergues y rescatistas del Valle del Mantaro?
+          </p>
+        </div>
+        <a
+          routerLink="/refugios"
+          class="px-space-lg py-2.5 bg-surface-container-lowest text-secondary rounded-full font-label-md text-label-md hover:bg-secondary-container transition-all shrink-0"
+        >
+          Volver al listado
+        </a>
+      </div>
+    </section>
+  } @else {
+    <section
+      class="max-w-[1280px] w-full mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-xl"
+    >
+      <div
+        class="max-w-2xl mx-auto text-center bg-surface-container-lowest rounded-2xl shadow-sm p-space-xl"
+      >
+        <span class="material-symbols-outlined text-5xl text-outline">search_off</span>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold mt-space-sm">
+          No encontramos este refugio
+        </h1>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+          El identificador «{{ id() }}» no corresponde a un refugio aliado. Puede que el enlace esté
+          incompleto o que el albergue haya sido retirado de la red.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-space-sm mt-space-lg">
+          <a
+            routerLink="/refugios"
+            class="w-full sm:w-auto px-space-xl py-3 bg-primary text-on-primary rounded-full font-label-md text-label-md font-bold hover:bg-primary-container transition-all"
+          >
+            Volver al listado de refugios
+          </a>
+          <a
+            routerLink="/mascotas"
+            class="w-full sm:w-auto px-space-xl py-3 bg-surface-container text-on-surface rounded-full font-label-md text-label-md font-bold hover:bg-surface-container-high transition-all"
+          >
+            Ver mascotas en adopción
+          </a>
+        </div>
+      </div>
+    </section>
+  }
+</div>

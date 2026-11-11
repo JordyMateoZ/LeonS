@@ -1,24 +1,42 @@
 <div class="flex flex-col w-full">
-  <div class="w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary-container opacity-70"></div>
+  <div
+    class="w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary-container opacity-70"
+  ></div>
 
   @if (mascota(); as m) {
     <section class="w-full bg-surface-container-lowest">
-      <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-sm flex items-center justify-between text-body-sm">
-        <nav aria-label="Ruta de navegación" class="flex items-center gap-space-xs flex-wrap font-label-md text-label-md">
-          <a routerLink="/" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+      <div
+        class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-sm flex items-center justify-between text-body-sm"
+      >
+        <nav
+          aria-label="Ruta de navegación"
+          class="flex items-center gap-space-xs flex-wrap font-label-md text-label-md"
+        >
+          <a
+            routerLink="/"
+            class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1"
+          >
             <span class="material-symbols-outlined text-base">home</span>
             <span>Inicio</span>
           </a>
           <span class="text-outline-variant font-bold">/</span>
-          <a routerLink="/mascotas" class="text-on-surface-variant hover:text-primary transition-colors">Mascotas en Adopción</a>
+          <a
+            routerLink="/mascotas"
+            class="text-on-surface-variant hover:text-primary transition-colors"
+            >Mascotas en Adopción</a
+          >
           <span class="text-outline-variant font-bold">/</span>
           <span class="text-primary font-bold flex items-center gap-1">
             <span class="material-symbols-outlined text-base">pets</span>
             {{ m.nombre }} ({{ m.generoTexto }} en adopción)
           </span>
         </nav>
-        <div class="hidden md:flex items-center gap-space-sm text-secondary font-label-sm text-label-sm">
-          <span class="inline-flex items-center gap-1 bg-secondary-container/40 px-3 py-1 rounded-full text-on-secondary-container">
+        <div
+          class="hidden md:flex items-center gap-space-sm text-secondary font-label-sm text-label-sm"
+        >
+          <span
+            class="inline-flex items-center gap-1 bg-secondary-container/40 px-3 py-1 rounded-full text-on-secondary-container"
+          >
             <span class="material-symbols-outlined text-sm">verified_user</span>
             ID Ficha: #{{ m.fichaId }}
           </span>
@@ -26,40 +44,66 @@
       </div>
     </section>
 
-    <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-lg md:py-space-xl">
+    <div
+      class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-space-lg md:py-space-xl"
+    >
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-start">
-
         <section class="lg:col-span-7 flex flex-col gap-space-xl">
           <article class="flex flex-col gap-space-md">
-            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container-high shadow-md group">
-              <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                [src]="fotoPrincipal().src" [alt]="fotoPrincipal().alt"/>
+            <div
+              class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container-high shadow-md group"
+            >
+              <img
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                [src]="fotoPrincipal().src"
+                [alt]="fotoPrincipal().alt"
+              />
 
               <div class="absolute top-4 left-4 flex flex-col gap-2">
-                <span class="inline-flex items-center gap-1.5 font-label-md text-label-md px-3.5 py-1.5 rounded-full shadow-md backdrop-blur-md"
-                  [class]="m.etiquetaClase">
-                  <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">{{ m.etiquetaIcono }}</span>
+                <span
+                  class="inline-flex items-center gap-1.5 font-label-md text-label-md px-3.5 py-1.5 rounded-full shadow-md backdrop-blur-md"
+                  [class]="m.etiquetaClase"
+                >
+                  <span
+                    class="material-symbols-outlined text-base"
+                    style="font-variation-settings: 'FILL' 1"
+                    >{{ m.etiquetaIcono }}</span
+                  >
                   {{ m.etiqueta }}
                 </span>
-                <span class="inline-flex items-center gap-1 bg-secondary text-on-secondary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm">
+                <span
+                  class="inline-flex items-center gap-1 bg-secondary text-on-secondary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm"
+                >
                   <span class="material-symbols-outlined text-sm">check_circle</span>
                   Verificada por veterinario
                 </span>
               </div>
 
-              <button type="button" (click)="alternarFavorito()"
+              <button
+                type="button"
+                (click)="alternarFavorito()"
                 [attr.aria-label]="esFavorito() ? 'Quitar de favoritos' : 'Guardar en favoritos'"
-                class="absolute top-4 right-4 w-12 h-12 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-primary flex items-center justify-center shadow-md hover:bg-surface-container-lowest hover:scale-110 active:scale-95 transition-all">
-                <span class="material-symbols-outlined text-2xl transition-colors"
-                  [style.font-variation-settings]="esFavorito() ? fill1 : fill0">favorite</span>
+                class="absolute top-4 right-4 w-12 h-12 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-primary flex items-center justify-center shadow-md hover:bg-surface-container-lowest hover:scale-110 active:scale-95 transition-all"
+              >
+                <span
+                  class="material-symbols-outlined text-2xl transition-colors"
+                  [style.font-variation-settings]="esFavorito() ? fill1 : fill0"
+                  >favorite</span
+                >
               </button>
 
-              <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-on-surface/70 via-on-surface/30 to-transparent flex justify-between items-end text-on-primary">
+              <div
+                class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-on-surface/70 via-on-surface/30 to-transparent flex justify-between items-end text-on-primary"
+              >
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-secondary-fixed">photo_camera</span>
-                  <span class="font-label-sm text-label-sm tracking-wide">{{ m.distrito }} • {{ m.refugio }}</span>
+                  <span class="font-label-sm text-label-sm tracking-wide"
+                    >{{ m.distrito }} • {{ m.refugio }}</span
+                  >
                 </div>
-                <span class="bg-surface-container-lowest/80 text-on-surface font-label-sm text-label-sm px-2.5 py-1 rounded-full backdrop-blur-sm">
+                <span
+                  class="bg-surface-container-lowest/80 text-on-surface font-label-sm text-label-sm px-2.5 py-1 rounded-full backdrop-blur-sm"
+                >
                   @if (fotos().length > 1) {
                     Foto {{ fotoActiva() + 1 }} de {{ fotos().length }}
                   } @else {
@@ -70,51 +114,97 @@
             </div>
 
             @if (fotos().length > 1) {
-              <div [attr.aria-label]="'Miniaturas de ' + m.nombre" class="grid grid-cols-5 gap-space-sm" role="tablist">
+              <div
+                [attr.aria-label]="'Miniaturas de ' + m.nombre"
+                class="grid grid-cols-5 gap-space-sm"
+                role="tablist"
+              >
                 @for (f of fotos(); track f.src; let i = $index) {
-                  <button type="button" role="tab" (click)="elegirFoto(i)" [attr.aria-selected]="fotoActiva() === i"
+                  <button
+                    type="button"
+                    role="tab"
+                    (click)="elegirFoto(i)"
+                    [attr.aria-selected]="fotoActiva() === i"
                     class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm transition-all"
-                    [class]="fotoActiva() === i ? 'outline-2 outline-primary outline-offset-2 scale-95' : 'opacity-80 hover:opacity-100 hover:scale-95'">
-                    <img class="w-full h-full object-cover" [src]="f.src" [alt]="f.alt"/>
+                    [class]="
+                      fotoActiva() === i
+                        ? 'outline-2 outline-primary outline-offset-2 scale-95'
+                        : 'opacity-80 hover:opacity-100 hover:scale-95'
+                    "
+                  >
+                    <img class="w-full h-full object-cover" [src]="f.src" [alt]="f.alt" />
                   </button>
                 }
               </div>
             }
           </article>
 
-          <article class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-sm">
+          <article
+            class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-sm"
+          >
             <div class="flex flex-wrap items-center justify-between gap-space-sm">
               <div class="flex items-center gap-space-sm flex-wrap">
-                <h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">{{ m.nombre }}</h1>
-                <span class="inline-flex items-center gap-1 bg-secondary-fixed text-secondary px-3 py-1 rounded-full font-label-sm text-label-sm" title="Ficha médica y datos verificados presencialmente">
-                  <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <h1
+                  class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight"
+                >
+                  {{ m.nombre }}
+                </h1>
+                <span
+                  class="inline-flex items-center gap-1 bg-secondary-fixed text-secondary px-3 py-1 rounded-full font-label-sm text-label-sm"
+                  title="Ficha médica y datos verificados presencialmente"
+                >
+                  <span
+                    class="material-symbols-outlined text-sm"
+                    style="font-variation-settings: 'FILL' 1"
+                    >verified</span
+                  >
                   Verificada LeonS
                 </span>
               </div>
-              <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full">Actualizado {{ m.actualizado }}</span>
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full"
+                >Actualizado {{ m.actualizado }}</span
+              >
             </div>
             <p class="font-body-lg text-body-lg text-primary font-semibold">
               {{ m.generoTexto }} {{ m.raza }} • {{ m.edadTexto }} • {{ m.sexo }}
             </p>
-            <div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm mt-1">
+            <div
+              class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm mt-1"
+            >
               <span class="material-symbols-outlined text-secondary text-lg">location_on</span>
-              <span class="font-medium text-on-surface">Distrito {{ m.distrito }}, Huancayo (Junín)</span>
+              <span class="font-medium text-on-surface"
+                >Distrito {{ m.distrito }}, Huancayo (Junín)</span
+              >
               <span class="text-outline-variant">•</span>
               <span>{{ m.lugar }}</span>
             </div>
           </article>
 
           <section aria-labelledby="key-specs" class="flex flex-col gap-space-sm">
-            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="key-specs">
+            <h2
+              class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs"
+              id="key-specs"
+            >
               <span class="material-symbols-outlined text-primary">badge</span>
               Ficha Técnica
             </h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-space-sm">
               @for (d of ficha(); track d.etiqueta) {
-                <div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-1 items-start" [class]="d.extra">
-                  <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">{{ d.etiqueta }}</span>
-                  <div class="flex items-center gap-1.5 text-on-surface font-label-lg text-label-lg">
-                    <span class="material-symbols-outlined text-xl" [class]="d.iconoClase">{{ d.icono }}</span>
+                <div
+                  class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-1 items-start"
+                  [class]="d.extra"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >{{ d.etiqueta }}</span
+                  >
+                  <div
+                    class="flex items-center gap-1.5 text-on-surface font-label-lg text-label-lg"
+                  >
+                    <span class="material-symbols-outlined text-xl" [class]="d.iconoClase">{{
+                      d.icono
+                    }}</span>
                     <span>{{ d.valor }}</span>
                   </div>
                 </div>
@@ -124,21 +214,35 @@
 
           <section aria-labelledby="health-heading" class="flex flex-col gap-space-sm">
             <div class="flex items-center justify-between gap-space-sm flex-wrap">
-              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="health-heading">
+              <h2
+                class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs"
+                id="health-heading"
+              >
                 <span class="material-symbols-outlined text-secondary">health_and_safety</span>
                 Estado de Salud y Cuidados Médicos
               </h2>
-              <span class="font-label-sm text-label-sm text-secondary font-semibold bg-secondary-container/40 px-3 py-1 rounded-full">Controles al día</span>
+              <span
+                class="font-label-sm text-label-sm text-secondary font-semibold bg-secondary-container/40 px-3 py-1 rounded-full"
+                >Controles al día</span
+              >
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
               @for (c of cuidados(); track c.titulo) {
-                <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-start gap-space-md">
-                  <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                <div
+                  class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-start gap-space-md"
+                >
+                  <div
+                    class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0"
+                  >
                     <span class="material-symbols-outlined text-2xl font-bold">{{ c.icono }}</span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="font-label-lg text-label-lg text-on-surface font-bold">{{ c.titulo }}</span>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">{{ c.texto }}</p>
+                    <span class="font-label-lg text-label-lg text-on-surface font-bold">{{
+                      c.titulo
+                    }}</span>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                      {{ c.texto }}
+                    </p>
                   </div>
                 </div>
               }
@@ -146,18 +250,26 @@
           </section>
 
           <section aria-labelledby="temperament-heading" class="flex flex-col gap-space-sm">
-            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="temperament-heading">
+            <h2
+              class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs"
+              id="temperament-heading"
+            >
               <span class="material-symbols-outlined text-primary">sentiment_very_satisfied</span>
               Temperamento y Convivencia
             </h2>
-            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md"
+            >
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Evaluada en el hogar de acogida temporal con pruebas de socialización y estímulos urbanos de Huancayo:
+                Evaluada en el hogar de acogida temporal con pruebas de socialización y estímulos
+                urbanos de Huancayo:
               </p>
               <div class="flex flex-wrap gap-2.5">
                 @for (r of rasgos(); track r.texto) {
                   <span [class]="r.clase">
-                    <span class="material-symbols-outlined text-base" [class]="r.iconoClase">{{ r.icono }}</span>
+                    <span class="material-symbols-outlined text-base" [class]="r.iconoClase">{{
+                      r.icono
+                    }}</span>
                     {{ r.texto }}
                   </span>
                 }
@@ -165,7 +277,9 @@
             </div>
           </section>
 
-          <article class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
+          <article
+            class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md"
+          >
             <div class="flex items-center gap-space-xs text-primary font-label-lg text-label-lg">
               <span class="material-symbols-outlined text-2xl">auto_stories</span>
               <span>La historia de {{ m.nombre }}</span>
@@ -175,27 +289,44 @@
                 <p>{{ p }}</p>
               }
               @if (cita(); as c) {
-                <p class="p-space-md bg-surface-container-low rounded-lg text-on-surface-variant font-body-sm text-body-sm italic">
+                <p
+                  class="p-space-md bg-surface-container-low rounded-lg text-on-surface-variant font-body-sm text-body-sm italic"
+                >
                   "{{ c.texto }}"
-                  <br/>
-                  <span class="not-italic font-bold text-on-surface mt-1 block">— {{ c.autor }}</span>
+                  <br />
+                  <span class="not-italic font-bold text-on-surface mt-1 block"
+                    >— {{ c.autor }}</span
+                  >
                 </p>
               }
             </div>
           </article>
 
-          <section aria-labelledby="req-heading" class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
+          <section
+            aria-labelledby="req-heading"
+            class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md"
+          >
             <div class="flex items-center justify-between gap-space-sm flex-wrap">
-              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs" id="req-heading">
+              <h2
+                class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs"
+                id="req-heading"
+              >
                 <span class="material-symbols-outlined text-primary">task_alt</span>
                 Requisitos de Adopción Responsable
               </h2>
-              <span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed/50 px-3 py-1 rounded-full">Protocolo LeonS</span>
+              <span
+                class="font-label-sm text-label-sm text-secondary bg-secondary-fixed/50 px-3 py-1 rounded-full"
+                >Protocolo LeonS</span
+              >
             </div>
             <ul class="flex flex-col gap-space-sm">
               @for (q of requisitos; track q.titulo) {
-                <li class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
-                  <span class="material-symbols-outlined text-secondary text-xl shrink-0 mt-0.5">{{ q.icono }}</span>
+                <li
+                  class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low"
+                >
+                  <span class="material-symbols-outlined text-secondary text-xl shrink-0 mt-0.5">{{
+                    q.icono
+                  }}</span>
                   <div class="flex flex-col font-body-sm text-body-sm">
                     <strong class="text-on-surface font-bold">{{ q.titulo }}</strong>
                     <span class="text-on-surface-variant">{{ q.texto }}</span>
@@ -207,75 +338,135 @@
         </section>
 
         <aside class="lg:col-span-5 flex flex-col gap-space-lg lg:sticky lg:top-24">
-
-          <div class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col gap-space-md">
+          <div
+            class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col gap-space-md"
+          >
             <div class="flex items-center justify-between gap-space-sm flex-wrap">
-              <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary font-label-md text-label-md px-3.5 py-1.5 rounded-full">
+              <span
+                class="inline-flex items-center gap-2 bg-secondary/10 text-secondary font-label-md text-label-md px-3.5 py-1.5 rounded-full"
+              >
                 <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
                 {{ m.urgente ? 'Urgente adopción' : 'Esperando familia responsable' }}
               </span>
-              <span class="font-label-sm text-label-sm text-on-surface-variant">Postulaciones abiertas</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant"
+                >Postulaciones abiertas</span
+              >
             </div>
 
             <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
               <div class="flex items-center justify-between">
-                <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Costo de Adopción</span>
-                <span class="font-headline-sm text-headline-sm text-primary font-extrabold">S/ 0.00</span>
+                <span
+                  class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant"
+                  >Costo de Adopción</span
+                >
+                <span class="font-headline-sm text-headline-sm text-primary font-extrabold"
+                  >S/ 0.00</span
+                >
               </div>
-              <p class="font-body-sm text-body-sm text-on-surface font-medium">Adopción 100% Gratuita • Cero fines de lucro</p>
-              <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+              <p class="font-body-sm text-body-sm text-on-surface font-medium">
+                Adopción 100% Gratuita • Cero fines de lucro
+              </p>
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5"
+              >
                 <span class="material-symbols-outlined text-sm text-secondary">verified</span>
                 Compromiso Ético LeonS: Las mascotas no se compran.
               </span>
             </div>
 
-            <button type="button" (click)="abrirModal()"
-              class="w-full min-h-[56px] py-4 px-6 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs shadow-lg hover:shadow-xl active:scale-[0.98] transition-all">
-              <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+            <button
+              type="button"
+              (click)="abrirModal()"
+              class="w-full min-h-[56px] py-4 px-6 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs shadow-lg hover:shadow-xl active:scale-[0.98] transition-all"
+            >
+              <span
+                class="material-symbols-outlined text-2xl"
+                style="font-variation-settings: 'FILL' 1"
+                >pets</span
+              >
               <span>Solicitar adopción de {{ m.nombre }}</span>
             </button>
 
             <div class="grid grid-cols-2 gap-space-sm">
-              <button type="button" (click)="alternarFavorito()"
-                class="w-full min-h-[48px] py-2.5 px-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-all active:scale-95">
-                <span class="material-symbols-outlined text-xl text-primary" [style.font-variation-settings]="esFavorito() ? fill1 : fill0">favorite</span>
+              <button
+                type="button"
+                (click)="alternarFavorito()"
+                class="w-full min-h-[48px] py-2.5 px-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-all active:scale-95"
+              >
+                <span
+                  class="material-symbols-outlined text-xl text-primary"
+                  [style.font-variation-settings]="esFavorito() ? fill1 : fill0"
+                  >favorite</span
+                >
                 <span>{{ esFavorito() ? 'Guardado' : 'Guardar' }}</span>
               </button>
-              <button type="button" (click)="compartir()"
-                class="w-full min-h-[48px] py-2.5 px-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-all active:scale-95">
+              <button
+                type="button"
+                (click)="compartir()"
+                class="w-full min-h-[48px] py-2.5 px-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-all active:scale-95"
+              >
                 <span class="material-symbols-outlined text-xl text-secondary">share</span>
                 <span>Compartir</span>
               </button>
             </div>
 
-            <div class="flex items-center justify-center gap-2 text-on-surface-variant font-label-sm text-label-sm pt-2">
-              <span class="material-symbols-outlined text-primary text-base">volunteer_activism</span>
-              <span><strong class="text-on-surface font-bold">{{ favoritos() }} personas</strong> guardaron a {{ m.nombre }} en su lista</span>
+            <div
+              class="flex items-center justify-center gap-2 text-on-surface-variant font-label-sm text-label-sm pt-2"
+            >
+              <span class="material-symbols-outlined text-primary text-base"
+                >volunteer_activism</span
+              >
+              <span
+                ><strong class="text-on-surface font-bold">{{ favoritos() }} personas</strong>
+                guardaron a {{ m.nombre }} en su lista</span
+              >
             </div>
           </div>
 
-
           @if (refugio(); as r) {
-            <article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+            <article
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-md"
+            >
               <div class="flex items-start gap-space-md">
-                <div class="w-14 h-14 rounded-full bg-primary/10 overflow-hidden shrink-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full bg-primary/10 overflow-hidden shrink-0 flex items-center justify-center"
+                >
                   @if (r.logo) {
-                    <img class="w-full h-full object-cover" [alt]="'Logo de ' + r.nombre" [src]="r.logo"/>
+                    <img
+                      class="w-full h-full object-cover"
+                      [alt]="'Logo de ' + r.nombre"
+                      [src]="r.logo"
+                    />
                   } @else {
                     <span class="material-symbols-outlined text-2xl text-primary">pets</span>
                   }
                 </div>
                 <div class="flex flex-col">
-                  <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">{{ r.nombre }}</h3>
-                  <span class="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm mt-0.5">
+                  <a
+                    [routerLink]="['/refugios', r.id]"
+                    class="hover:text-primary transition-colors"
+                  >
+                    <h3
+                      class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight"
+                    >
+                      {{ r.nombre }}
+                    </h3>
+                  </a>
+                  <span
+                    class="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm mt-0.5"
+                  >
                     <span class="material-symbols-outlined text-sm font-bold">verified</span>
                     Refugio Aliado Verificado LeonS
                   </span>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">{{ r.distrito }}, Huancayo • En labor desde {{ r.desde }}</p>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                    {{ r.distrito }}, Huancayo • En labor desde {{ r.desde }}
+                  </p>
                 </div>
               </div>
 
-              <div class="p-space-sm bg-surface-container-low rounded-lg flex items-center gap-space-sm">
+              <div
+                class="p-space-sm bg-surface-container-low rounded-lg flex items-center gap-space-sm"
+              >
                 <span class="material-symbols-outlined text-secondary text-2xl">support_agent</span>
                 <div class="flex flex-col font-body-sm text-body-sm">
                   <span class="font-bold text-on-surface">{{ r.contacto }}</span>
@@ -285,41 +476,73 @@
 
               <div class="grid grid-cols-2 gap-space-sm text-center">
                 <div class="p-space-sm rounded-lg bg-surface-container">
-                  <span class="font-headline-md text-headline-md text-primary font-bold">{{ r.adoptadas }}</span>
-                  <span class="font-label-sm text-label-sm text-on-surface-variant block">Mascotas Adoptadas</span>
+                  <span class="font-headline-md text-headline-md text-primary font-bold">{{
+                    r.adoptadas
+                  }}</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                    >Mascotas Adoptadas</span
+                  >
                 </div>
                 <div class="p-space-sm rounded-lg bg-surface-container">
-                  <span class="font-headline-md text-headline-md text-secondary font-bold">{{ r.enAcogida }}</span>
-                  <span class="font-label-sm text-label-sm text-on-surface-variant block">En Acogida Actual</span>
+                  <span class="font-headline-md text-headline-md text-secondary font-bold">{{
+                    r.enAcogida
+                  }}</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                    >En Acogida Actual</span
+                  >
                 </div>
               </div>
 
-              <a [href]="whatsappUrl()" rel="noopener noreferrer" target="_blank"
-                class="w-full min-h-[48px] py-3 px-4 rounded-full bg-secondary hover:bg-secondary-container text-on-secondary hover:text-on-secondary-container font-label-md text-label-md font-bold flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 text-center">
+              <a
+                [href]="whatsappUrl()"
+                rel="noopener noreferrer"
+                target="_blank"
+                class="w-full min-h-[48px] py-3 px-4 rounded-full bg-secondary hover:bg-secondary-container text-on-secondary hover:text-on-secondary-container font-label-md text-label-md font-bold flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 text-center"
+              >
                 <span class="material-symbols-outlined text-xl">chat</span>
                 <span>Consultar por WhatsApp ({{ r.telefono }})</span>
               </a>
 
-              <div class="flex items-start gap-2 text-on-surface-variant font-label-sm text-label-sm pt-1">
-                <span class="material-symbols-outlined text-secondary text-base shrink-0">shield</span>
-                <span><strong>Aviso de Seguridad:</strong> LeonS nunca cobra dinero por adopciones ni solicita adelantos bancarios. Denuncia cobros indebidos.</span>
+              <div
+                class="flex items-start gap-2 text-on-surface-variant font-label-sm text-label-sm pt-1"
+              >
+                <span class="material-symbols-outlined text-secondary text-base shrink-0"
+                  >shield</span
+                >
+                <span
+                  ><strong>Aviso de Seguridad:</strong> LeonS nunca cobra dinero por adopciones ni
+                  solicita adelantos bancarios. Denuncia cobros indebidos.</span
+                >
               </div>
             </article>
           }
 
-          <article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
-            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs">
+          <article
+            class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md"
+          >
+            <h3
+              class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-space-xs"
+            >
               <span class="material-symbols-outlined text-primary">quiz</span>
               Preguntas Frecuentes
             </h3>
             <div class="flex flex-col gap-space-sm">
               @for (p of preguntas(); track p.pregunta) {
-                <details class="group p-space-sm bg-surface-container-low rounded-lg transition-all">
-                  <summary class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between cursor-pointer list-none">
+                <details
+                  class="group p-space-sm bg-surface-container-low rounded-lg transition-all"
+                >
+                  <summary
+                    class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between cursor-pointer list-none"
+                  >
                     <span>{{ p.pregunta }}</span>
-                    <span class="material-symbols-outlined text-lg text-primary transition-transform group-open:rotate-180">expand_more</span>
+                    <span
+                      class="material-symbols-outlined text-lg text-primary transition-transform group-open:rotate-180"
+                      >expand_more</span
+                    >
                   </summary>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">{{ p.respuesta }}</p>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                    {{ p.respuesta }}
+                  </p>
                 </details>
               }
             </div>
@@ -329,13 +552,25 @@
     </div>
 
     <section class="w-full bg-surface-container-low py-space-xl mt-space-xl">
-      <div class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col gap-space-lg">
+      <div
+        class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col gap-space-lg"
+      >
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm">
           <div class="flex flex-col gap-1">
-            <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Más patitas en el Valle del Mantaro</span>
-            <h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">Mascotas similares que también buscan hogar</h2>
+            <span
+              class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider"
+              >Más patitas en el Valle del Mantaro</span
+            >
+            <h2
+              class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight"
+            >
+              Mascotas similares que también buscan hogar
+            </h2>
           </div>
-          <a routerLink="/mascotas" class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-primary hover:text-primary-container font-bold transition-all hover:translate-x-1">
+          <a
+            routerLink="/mascotas"
+            class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-primary hover:text-primary-container font-bold transition-all hover:translate-x-1"
+          >
             <span>Ver todas las mascotas en adopción ({{ totalMascotas }})</span>
             <span class="material-symbols-outlined text-xl">arrow_forward</span>
           </a>
@@ -343,14 +578,25 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
           @for (s of similares(); track s.id) {
-            <article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+            <article
+              class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+            >
               <div class="relative aspect-[4/3] w-full bg-surface-container overflow-hidden">
-                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" [src]="s.foto" [alt]="s.alt"/>
+                <img
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  [src]="s.foto"
+                  [alt]="s.alt"
+                />
                 <div class="absolute top-3 left-3 flex gap-1">
-                  <span class="bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2.5 py-1 rounded-full font-bold">{{ s.edadTexto }}</span>
+                  <span
+                    class="bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2.5 py-1 rounded-full font-bold"
+                    >{{ s.edadTexto }}</span
+                  >
                 </div>
                 <div class="absolute top-3 right-3">
-                  <span class="bg-secondary text-on-secondary font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                  <span
+                    class="bg-secondary text-on-secondary font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm"
+                  >
                     <span class="material-symbols-outlined text-xs">check</span> {{ s.etiqueta }}
                   </span>
                 </div>
@@ -358,17 +604,31 @@
               <div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
                 <div class="flex flex-col gap-1">
                   <div class="flex items-center justify-between gap-2">
-                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold group-hover:text-primary transition-colors">{{ s.nombre }}</h3>
-                    <span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">{{ s.sexo }} • {{ s.tamanoTexto }}</span>
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface font-bold group-hover:text-primary transition-colors"
+                    >
+                      {{ s.nombre }}
+                    </h3>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant shrink-0"
+                      >{{ s.sexo }} • {{ s.tamanoTexto }}</span
+                    >
                   </div>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-                    <span class="material-symbols-outlined text-sm text-secondary">location_on</span>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-sm text-secondary"
+                      >location_on</span
+                    >
                     {{ s.lugar }}
                   </p>
-                  <p class="font-body-sm text-body-sm text-on-surface mt-1 line-clamp-2">{{ s.descripcion }}</p>
+                  <p class="font-body-sm text-body-sm text-on-surface mt-1 line-clamp-2">
+                    {{ s.descripcion }}
+                  </p>
                 </div>
-                <a [routerLink]="['/mascotas', s.id]"
-                  class="w-full min-h-[48px] py-2.5 px-4 rounded-full bg-surface-container hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 transition-all text-center">
+                <a
+                  [routerLink]="['/mascotas', s.id]"
+                  class="w-full min-h-[48px] py-2.5 px-4 rounded-full bg-surface-container hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 transition-all text-center"
+                >
                   <span>Conocer a {{ s.nombreCorto }}</span>
                   <span class="material-symbols-outlined text-base">arrow_forward</span>
                 </a>
@@ -379,45 +639,89 @@
       </div>
     </section>
 
-
     @if (modalAbierto()) {
-      <div class="fixed inset-0 z-[60] flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm p-margin"
-        role="dialog" aria-modal="true" aria-labelledby="modal-titulo" (click)="cerrarModal()">
-        <div class="p-0 rounded-2xl bg-surface-container-lowest max-w-lg w-[92vw] max-h-[90vh] overflow-y-auto shadow-2xl" (click)="$event.stopPropagation()">
+      <div
+        class="fixed inset-0 z-[60] flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm p-margin"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-titulo"
+        (click)="cerrarModal()"
+      >
+        <div
+          class="p-0 rounded-2xl bg-surface-container-lowest max-w-lg w-[92vw] max-h-[90vh] overflow-y-auto shadow-2xl"
+          (click)="$event.stopPropagation()"
+        >
           <div class="p-space-lg md:p-space-xl flex flex-col gap-space-md">
             <div class="flex items-start justify-between gap-2">
               <div class="flex items-center gap-space-sm">
-                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center"
+                >
                   <span class="material-symbols-outlined text-2xl">pets</span>
                 </div>
                 <div>
-                  <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold" id="modal-titulo">Postular para {{ m.nombre }}</h3>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant">{{ m.refugio }} • {{ m.distrito }}</p>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                    id="modal-titulo"
+                  >
+                    Postular para {{ m.nombre }}
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    {{ m.refugio }} • {{ m.distrito }}
+                  </p>
                 </div>
               </div>
-              <button type="button" (click)="cerrarModal()" aria-label="Cerrar"
-                class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface shrink-0">
+              <button
+                type="button"
+                (click)="cerrarModal()"
+                aria-label="Cerrar"
+                class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface shrink-0"
+              >
                 <span class="material-symbols-outlined text-xl">close</span>
               </button>
             </div>
 
             <form class="flex flex-col gap-space-md" (submit)="enviarSolicitud($event)">
               <div class="flex flex-col gap-1">
-                <label class="font-label-md text-label-md text-on-surface font-semibold" for="adopt-name">Nombres y Apellidos</label>
-                <input id="adopt-name" type="text" required placeholder="Ej. Carmen Quispe Mallqui"
-                  class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"/>
+                <label
+                  class="font-label-md text-label-md text-on-surface font-semibold"
+                  for="adopt-name"
+                  >Nombres y Apellidos</label
+                >
+                <input
+                  id="adopt-name"
+                  type="text"
+                  required
+                  placeholder="Ej. Carmen Quispe Mallqui"
+                  class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
+                />
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
                 <div class="flex flex-col gap-1">
-                  <label class="font-label-md text-label-md text-on-surface font-semibold" for="adopt-phone">Celular (WhatsApp)</label>
-                  <input id="adopt-phone" type="tel" required placeholder="964 123 456"
-                    class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"/>
+                  <label
+                    class="font-label-md text-label-md text-on-surface font-semibold"
+                    for="adopt-phone"
+                    >Celular (WhatsApp)</label
+                  >
+                  <input
+                    id="adopt-phone"
+                    type="tel"
+                    required
+                    placeholder="964 123 456"
+                    class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
                 </div>
                 <div class="flex flex-col gap-1">
-                  <label class="font-label-md text-label-md text-on-surface font-semibold" for="adopt-district">Distrito en Junín</label>
-                  <select id="adopt-district"
-                    class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary">
+                  <label
+                    class="font-label-md text-label-md text-on-surface font-semibold"
+                    for="adopt-district"
+                    >Distrito en Junín</label
+                  >
+                  <select
+                    id="adopt-district"
+                    class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
                     <option value="el-tambo">El Tambo</option>
                     <option value="huancayo">Huancayo Centro</option>
                     <option value="chilca">Chilca</option>
@@ -429,33 +733,51 @@
               </div>
 
               <div class="flex flex-col gap-1">
-                <span class="font-label-md text-label-md text-on-surface font-semibold">¿Qué tipo de vivienda tienes?</span>
+                <span class="font-label-md text-label-md text-on-surface font-semibold"
+                  >¿Qué tipo de vivienda tienes?</span
+                >
                 <div class="grid grid-cols-2 gap-2 text-label-md font-label-md">
-                  <label class="flex items-center gap-2 p-3 bg-surface-container-low rounded-xl cursor-pointer">
-                    <input type="radio" name="housing" value="casa" checked class="accent-primary"/>
+                  <label
+                    class="flex items-center gap-2 p-3 bg-surface-container-low rounded-xl cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name="housing"
+                      value="casa"
+                      checked
+                      class="accent-primary"
+                    />
                     <span>Casa propia con patio</span>
                   </label>
-                  <label class="flex items-center gap-2 p-3 bg-surface-container-low rounded-xl cursor-pointer">
-                    <input type="radio" name="housing" value="dpto" class="accent-primary"/>
+                  <label
+                    class="flex items-center gap-2 p-3 bg-surface-container-low rounded-xl cursor-pointer"
+                  >
+                    <input type="radio" name="housing" value="dpto" class="accent-primary" />
                     <span>Departamento pet-friendly</span>
                   </label>
                 </div>
               </div>
 
               <div class="flex items-start gap-2 pt-1">
-                <input id="terms-check" type="checkbox" required class="mt-1 accent-secondary"/>
+                <input id="terms-check" type="checkbox" required class="mt-1 accent-secondary" />
                 <label class="font-body-sm text-body-sm text-on-surface-variant" for="terms-check">
-                  Acepto el compromiso de no mantener a {{ m.nombre }} en azotea ni encadenada y permitir la visita de coordinación respetuosa.
+                  Acepto el compromiso de no mantener a {{ m.nombre }} en azotea ni encadenada y
+                  permitir la visita de coordinación respetuosa.
                 </label>
               </div>
 
               <div class="flex items-center gap-space-sm pt-2">
-                <button type="button" (click)="cerrarModal()"
-                  class="flex-1 min-h-[48px] rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-semibold">
+                <button
+                  type="button"
+                  (click)="cerrarModal()"
+                  class="flex-1 min-h-[48px] rounded-full bg-surface-container text-on-surface font-label-md text-label-md font-semibold"
+                >
                   Cancelar
                 </button>
-                <button type="submit"
-                  class="flex-1 min-h-[48px] rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-md active:scale-95 transition-all">
+                <button
+                  type="submit"
+                  class="flex-1 min-h-[48px] rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-md active:scale-95 transition-all"
+                >
                   Enviar Solicitud
                 </button>
               </div>
@@ -465,17 +787,23 @@
       </div>
     }
   } @else {
-
-    <section class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-margin-lg flex flex-col items-center text-center gap-space-md min-h-[55vh] justify-center">
+    <section
+      class="w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg py-margin-lg flex flex-col items-center text-center gap-space-md min-h-[55vh] justify-center"
+    >
       <div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center">
         <span class="material-symbols-outlined text-4xl text-primary">search_off</span>
       </div>
-      <h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">No encontramos esta mascota</h1>
+      <h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">
+        No encontramos esta mascota
+      </h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-        La ficha que buscas no existe o la mascota ya encontró un hogar. Explora el catálogo para conocer a otros peluditos que siguen esperando una familia.
+        La ficha que buscas no existe o la mascota ya encontró un hogar. Explora el catálogo para
+        conocer a otros peluditos que siguen esperando una familia.
       </p>
-      <a routerLink="/mascotas"
-        class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-on-primary bg-primary hover:bg-primary-container px-space-xl py-3.5 rounded-full shadow-md active:scale-95 transition-all">
+      <a
+        routerLink="/mascotas"
+        class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-on-primary bg-primary hover:bg-primary-container px-space-xl py-3.5 rounded-full shadow-md active:scale-95 transition-all"
+      >
         <span class="material-symbols-outlined text-xl">pets</span>
         <span>Ver mascotas en adopción</span>
       </a>
@@ -483,7 +811,10 @@
   }
 
   @if (mensaje()) {
-    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-md w-[92vw] bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-space-lg py-space-md rounded-xl shadow-xl" role="status">
+    <div
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-md w-[92vw] bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-space-lg py-space-md rounded-xl shadow-xl"
+      role="status"
+    >
       {{ mensaje() }}
     </div>
   }

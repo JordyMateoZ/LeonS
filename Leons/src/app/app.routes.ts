@@ -3,10 +3,23 @@ import { Inicio } from './pages/inicio/inicio';
 
 export const routes: Routes = [
   { path: '', component: Inicio },
-  { path: 'mascotas', loadComponent: () => import('./pages/catalogo/catalogo').then((m) => m.Catalogo) },
+  {
+    path: 'mascotas',
+    loadComponent: () => import('./pages/catalogo/catalogo').then((m) => m.Catalogo),
+  },
   {
     path: 'mascotas/:id',
-    loadComponent: () => import('./pages/detalle-mascota/detalle-mascota').then((m) => m.DetalleMascota),
+    loadComponent: () =>
+      import('./pages/detalle-mascota/detalle-mascota').then((m) => m.DetalleMascota),
+  },
+  {
+    path: 'refugios',
+    loadComponent: () => import('./pages/refugios/refugios').then((m) => m.Refugios),
+  },
+  {
+    path: 'refugios/:id',
+    loadComponent: () =>
+      import('./pages/detalle-refugio/detalle-refugio').then((m) => m.DetalleRefugio),
   },
   {
     path: 'login',

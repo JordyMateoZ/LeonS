@@ -1,5 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { map } from 'rxjs';
 import { MascotasService } from '../../services/mascotas.service';
 
 type Orden = 'recent' | 'urgent' | 'youngest' | 'oldest';
@@ -18,6 +20,19 @@ interface Opcion {
 })
 export class Catalogo {
   private readonly mascotasService = inject(MascotasService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+
+  /** Refugio recibido por query param al llegar desde «Ver mascotas». */
+  readonly refugioId = toSignal(
+    this.route.queryParamMap.pipe(map((params) => params.get('refugio') ?? '')),
+    { initialValue: this.route.snapshot.queryParamMap.get('refugio') ?? '' },
+  );
+
+  readonly refugioFiltro = computed(() => {
+    const id = this.refugioId();
+    return id ? this.mascotasService.refugioPorId(id) : undefined;
+  });
 
   // Valores constantes para el icono de favorito
   readonly fill0 = "'FILL' 0";
@@ -33,7 +48,15 @@ export class Catalogo {
     { etiqueta: 'Gatos', valor: 'gato', icono: 'sound_detection_dog_barking' },
     { etiqueta: 'Otros', valor: 'otro' },
   ];
-  readonly distritos = ['Todos', 'Huancayo Centro', 'El Tambo', 'Chilca', 'Pilcomayo', 'San Agustín de Cajas', 'Sapallanga'];
+  readonly distritos = [
+    'Todos',
+    'Huancayo Centro',
+    'El Tambo',
+    'Chilca',
+    'Pilcomayo',
+    'San Agustín de Cajas',
+    'Sapallanga',
+  ];
   readonly tamanos = ['Todos', 'Pequeño', 'Mediano', 'Grande'];
   readonly edades: Opcion[] = [
     { etiqueta: 'Todos', valor: 'todos' },
@@ -74,7 +97,9 @@ export class Catalogo {
     const q = this.busqueda().trim().toLowerCase();
     const lista = this.mascotas.filter(
       (m) =>
-        (!q || [m.nombre, m.refugio, m.etiqueta, m.lugar].some((t) => t.toLowerCase().includes(q))) &&
+        (!q ||
+          [m.nombre, m.refugio, m.etiqueta, m.lugar].some((t) => t.toLowerCase().includes(q))) &&
+        (!this.refugioId() || m.refugioId === this.refugioId()) &&
         (this.especie() === 'todos' || m.especie === this.especie()) &&
         (this.distrito() === 'Todos' || m.distrito === this.distrito()) &&
         (this.tamano() === 'Todos' || m.tamano === this.tamano()) &&
@@ -97,7 +122,9 @@ export class Catalogo {
   });
 
   // Paginación calculada sobre el resultado filtrado
-  readonly totalPaginas = computed(() => Math.max(1, Math.ceil(this.filtradas().length / this.porPagina)));
+  readonly totalPaginas = computed(() =>
+    Math.max(1, Math.ceil(this.filtradas().length / this.porPagina)),
+  );
   readonly paginas = computed(() => Array.from({ length: this.totalPaginas() }, (_, i) => i + 1));
   readonly paginaSegura = computed(() => Math.min(this.paginaActual(), this.totalPaginas()));
   readonly visibles = computed(() => {
@@ -107,15 +134,22 @@ export class Catalogo {
 
   private coincideEdad(anios: number, grupo: string): boolean {
     switch (grupo) {
-      case 'cachorro': return anios < 1;
-      case 'joven': return anios >= 1 && anios < 3;
-      case 'adulto': return anios >= 3 && anios <= 7;
-      case 'senior': return anios > 7;
-      default: return true;
+      case 'cachorro':
+        return anios < 1;
+      case 'joven':
+        return anios >= 1 && anios < 3;
+      case 'adulto':
+        return anios >= 3 && anios <= 7;
+      case 'senior':
+        return anios > 7;
+      default:
+        return true;
     }
   }
 
-  buscar(texto: string) { this.busqueda.set(texto); }
+  buscar(texto: string) {
+    this.busqueda.set(texto);
+  }
 
   limpiarFiltros() {
     this.busqueda.set('');
@@ -129,15 +163,32 @@ export class Catalogo {
     this.soloUrgentes.set(false);
     this.orden.set('recent');
     this.paginaActual.set(1);
+    if (this.refugioId()) {
+      this.router.navigate(['/mascotas']);
+    }
   }
 
-  cambiarOrden(valor: string) { this.orden.set(valor as Orden); }
+  quitarFiltroRefugio() {
+    this.router.navigate(['/mascotas']);
+  }
 
-  alternarEsterilizados() { this.soloEsterilizados.update((v) => !v); }
-  alternarVacunados() { this.soloVacunados.update((v) => !v); }
-  alternarUrgentes() { this.soloUrgentes.update((v) => !v); }
+  cambiarOrden(valor: string) {
+    this.orden.set(valor as Orden);
+  }
 
-  esFavorito(id: number): boolean { return this.favoritos().has(id); }
+  alternarEsterilizados() {
+    this.soloEsterilizados.update((v) => !v);
+  }
+  alternarVacunados() {
+    this.soloVacunados.update((v) => !v);
+  }
+  alternarUrgentes() {
+    this.soloUrgentes.update((v) => !v);
+  }
+
+  esFavorito(id: number): boolean {
+    return this.favoritos().has(id);
+  }
 
   alternarFavorito(id: number) {
     const nuevo = new Set(this.favoritos());

@@ -13,6 +13,8 @@ export interface Refugio {
   enAcogida: number;
   verificado: boolean;
   especies: ('perro' | 'gato')[];
+  direccion: string;
+  tipo: 'constituido' | 'independiente';
 }
 
 export const REFUGIOS: Refugio[] = [
@@ -20,8 +22,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'huellitas-wanka',
     nombre: 'Albergue Huellitas Wanka',
     distrito: 'El Tambo',
+    direccion: 'Av. Mariscal Castilla 1420, El Tambo',
+    tipo: 'constituido',
     desde: 2021,
-    descripcion: 'Hogar temporal para perros y gatos rescatados en El Tambo. Trabaja con voluntarias y veterinarias solidarias del Valle del Mantaro.',
+    descripcion:
+      'Hogar temporal para perros y gatos rescatados en El Tambo. Trabaja con voluntarias y veterinarias solidarias del Valle del Mantaro.',
     contacto: 'Lic. Silvia Mallqui',
     cargo: 'Coordinadora de Adopciones y Rescates',
     telefono: '+51 964 123 456',
@@ -36,8 +41,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'hogar-san-roque',
     nombre: 'Hogar San Roque Chilca',
     distrito: 'Chilca',
+    direccion: 'Jr. Santos Chocano 250, Chilca Alta',
+    tipo: 'constituido',
     desde: 2019,
-    descripcion: 'Rescate y acogida de perros y gatos en Chilca. Coordina visitas, evaluaciones y seguimiento post-adopción con familias del distrito.',
+    descripcion:
+      'Rescate y acogida de perros y gatos en Chilca. Coordina visitas, evaluaciones y seguimiento post-adopción con familias del distrito.',
     contacto: 'Marco Quispe',
     cargo: 'Fundador',
     telefono: '+51 954 221 330',
@@ -51,8 +59,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'mantaro-solidario',
     nombre: 'Rescate Mantaro Solidario',
     distrito: 'Sapallanga',
+    direccion: 'Jr. Los Álamos 118, Sapallanga',
+    tipo: 'independiente',
     desde: 2020,
-    descripcion: 'Red de rescatistas independientes enfocada en animales heridos o abandonados en la margen del río Mantaro.',
+    descripcion:
+      'Red de rescatistas independientes enfocada en animales heridos o abandonados en la margen del río Mantaro.',
     contacto: 'Ana Torres',
     cargo: 'Coordinadora de rescates',
     telefono: '+51 962 887 410',
@@ -66,8 +77,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'red-animalista-wanka',
     nombre: 'Red Animalista Wanka',
     distrito: 'Huancayo Centro',
+    direccion: 'Jr. Puno 455, Huancayo Centro',
+    tipo: 'independiente',
     desde: 2018,
-    descripcion: 'Colectivo de rescatistas y familias de acogida que promueve la tenencia responsable en el centro de Huancayo.',
+    descripcion:
+      'Colectivo de rescatistas y familias de acogida que promueve la tenencia responsable en el centro de Huancayo.',
     contacto: 'Rosa Huamán',
     cargo: 'Presidenta',
     telefono: '+51 971 456 220',
@@ -81,8 +95,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'san-agustin',
     nombre: 'Albergue San Agustín',
     distrito: 'San Agustín de Cajas',
+    direccion: 'Av. Principal 320, San Agustín de Cajas',
+    tipo: 'constituido',
     desde: 2022,
-    descripcion: 'Albergue familiar con espacio exterior para perros grandes y gatos adultos que esperan una segunda oportunidad.',
+    descripcion:
+      'Albergue familiar con espacio exterior para perros grandes y gatos adultos que esperan una segunda oportunidad.',
     contacto: 'Luis Paredes',
     cargo: 'Responsable de acogida',
     telefono: '+51 968 334 112',
@@ -96,8 +113,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'esperanza-junin',
     nombre: 'Refugio Esperanza Junín',
     distrito: 'Pilcomayo',
+    direccion: 'Av. Chupaca 610, Pilcomayo',
+    tipo: 'constituido',
     desde: 2017,
-    descripcion: 'Uno de los refugios con más trayectoria del valle. Atiende rescates, esterilizaciones y adopciones responsables.',
+    descripcion:
+      'Uno de los refugios con más trayectoria del valle. Atiende rescates, esterilizaciones y adopciones responsables.',
     contacto: 'Carmen Flores',
     cargo: 'Directora',
     telefono: '+51 964 778 903',
@@ -111,8 +131,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'hogar-felino-wanka',
     nombre: 'Hogar Felino Wanka',
     distrito: 'El Tambo',
+    direccion: 'Jr. Los Cerezos 145, El Tambo',
+    tipo: 'constituido',
     desde: 2021,
-    descripcion: 'Hogar especializado en gatos rescatados, con protocolo de sociabilización y pruebas felinas antes de la adopción.',
+    descripcion:
+      'Hogar especializado en gatos rescatados, con protocolo de sociabilización y pruebas felinas antes de la adopción.',
     contacto: 'Patricia Rojas',
     cargo: 'Especialista en gatos',
     telefono: '+51 955 610 284',
@@ -126,8 +149,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'mantaro-felino',
     nombre: 'Rescate Mantaro Felino',
     distrito: 'Huancayo Centro',
+    direccion: 'Jr. Cusco 780, Huancayo Centro',
+    tipo: 'independiente',
     desde: 2020,
-    descripcion: 'Rescate de gatitos y gatos adultos en situación de calle. Promueve la esterilización y el cuidado responsable.',
+    descripcion:
+      'Rescate de gatitos y gatos adultos en situación de calle. Promueve la esterilización y el cuidado responsable.',
     contacto: 'Jorge Salazar',
     cargo: 'Coordinador',
     telefono: '+51 966 402 118',
@@ -141,8 +167,11 @@ export const REFUGIOS: Refugio[] = [
     id: 'amigos-4-patas',
     nombre: 'Amigos de 4 Patas El Tambo',
     distrito: 'El Tambo',
+    direccion: 'Jr. Las Retamas 210, El Tambo',
+    tipo: 'independiente',
     desde: 2019,
-    descripcion: 'Grupo de vecinos que rescata perros abandonados y les busca hogares temporales y definitivos en El Tambo.',
+    descripcion:
+      'Grupo de vecinos que rescata perros abandonados y les busca hogares temporales y definitivos en El Tambo.',
     contacto: 'Elena Cárdenas',
     cargo: 'Fundadora',
     telefono: '+51 973 205 664',

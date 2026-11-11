@@ -1,40 +1,116 @@
-<header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(44,62,80,0.06)]">
-  <div class="h-20 w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex items-center justify-between gap-space-md">
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(44,62,80,0.06)]"
+>
+  <div
+    class="h-20 w-full max-w-[1280px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex items-center justify-between gap-space-md"
+  >
     <div class="flex items-center gap-space-md shrink-0">
       <a routerLink="/" class="flex items-center gap-space-sm focus:outline-none">
-        <img alt="LeonS Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7DVrQgRP6O-CkuP1-VEOd6oqdXpHylQiJeQdNKN1a_nyV_iYFC1FHkEEwv7bShhopTUMSYnvLUxEt82oYLbaPB_z9Bq4DKx6TNMfSbBVRtZsqI5YcyjtUmc-pFhXr3R7K1Ov2Qi-Od8ROGIJyfa8Ew6GctocILrWb76FCyhyxDg5p_2aK7vxanNqb_Y1BSJGRxysqo5UffW8lQZV-LRJhNxsEBQNFTnvpwB4Fr91B"/>
+        <img
+          alt="LeonS Logo"
+          class="h-8 w-auto object-contain"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7DVrQgRP6O-CkuP1-VEOd6oqdXpHylQiJeQdNKN1a_nyV_iYFC1FHkEEwv7bShhopTUMSYnvLUxEt82oYLbaPB_z9Bq4DKx6TNMfSbBVRtZsqI5YcyjtUmc-pFhXr3R7K1Ov2Qi-Od8ROGIJyfa8Ew6GctocILrWb76FCyhyxDg5p_2aK7vxanNqb_Y1BSJGRxysqo5UffW8lQZV-LRJhNxsEBQNFTnvpwB4Fr91B"
+        />
         <div class="flex flex-col">
-          <span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight leading-none">LeonS</span>
-          <span class="font-label-sm text-label-sm text-secondary tracking-wide uppercase mt-0.5">Adopción Huancayo</span>
+          <span
+            class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight leading-none"
+            >LeonS</span
+          >
+          <span class="font-label-sm text-label-sm text-secondary tracking-wide uppercase mt-0.5"
+            >Adopción Huancayo</span
+          >
         </div>
       </a>
-      <div class="hidden xl:flex items-center gap-space-xs bg-surface-container-low px-space-md py-1.5 rounded-full text-on-surface-variant">
+      <div
+        class="hidden 2xl:flex items-center gap-space-xs bg-surface-container-low px-space-md py-1.5 rounded-full text-on-surface-variant"
+      >
         <span class="material-symbols-outlined text-sm text-secondary">location_on</span>
         <span class="font-label-sm text-label-sm">Huancayo, El Tambo y Chilca</span>
       </div>
     </div>
 
     <nav class="hidden lg:flex items-center gap-space-xs">
-      <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }"
-         class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors">Inicio</a>
-      <a routerLink="/mascotas" routerLinkActive="activo"
-         class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors">Mascotas en Adopción</a>
-      <a routerLink="/como-funciona" routerLinkActive="activo"
-         class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors">Cómo Funciona</a>
-      <a routerLink="/refugios" routerLinkActive="activo"
-         class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors">Refugios Aliados</a>
-      <a routerLink="/impacto" routerLinkActive="activo"
-         class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors">Impacto</a>
-      <a routerLink="/sobre-nosotros" routerLinkActive="activo"
-         class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors">Sobre Nosotros</a>
+      <a
+        routerLink="/"
+        routerLinkActive="activo"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors"
+        >Inicio</a
+      >
+      <a
+        routerLink="/mascotas"
+        routerLinkActive="activo"
+        class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors"
+        >Mascotas en Adopción</a
+      >
+      <a
+        routerLink="/como-funciona"
+        routerLinkActive="activo"
+        class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors"
+        >Cómo Funciona</a
+      >
+      <a
+        routerLink="/refugios"
+        routerLinkActive="activo"
+        class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors"
+        >Refugios Aliados</a
+      >
+      <a
+        routerLink="/impacto"
+        routerLinkActive="activo"
+        class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors"
+        >Impacto</a
+      >
+      <a
+        routerLink="/sobre-nosotros"
+        routerLinkActive="activo"
+        class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-full transition-colors"
+        >Sobre Nosotros</a
+      >
     </nav>
 
     <div class="flex items-center gap-space-sm shrink-0">
-      <a routerLink="/login" class="hidden sm:inline-flex items-center justify-center font-label-md text-label-md text-secondary hover:bg-secondary-container hover:text-on-secondary-container px-space-lg py-2.5 rounded-full transition-all min-h-[48px]">Soy Refugio / Iniciar Sesión</a>
-      <a routerLink="/mascotas" class="inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container px-space-lg py-2.5 rounded-full transition-all shadow-[0_2px_6px_-1px_rgba(211,84,0,0.2)] active:scale-95 min-h-[48px]">Quiero Adoptar</a>
-      <a routerLink="/mis-solicitudes" aria-label="Ver mis solicitudes de adopción"
-         class="ml-1 shrink-0 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-        <img alt="Perfil" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChR4uvuQn0S8iTDsOFsFxIus5tujWI0YHGWfb0FynYfAkiUSh133SHnatpNEhRX_oy4t5fI8okOo88Jxp66ayQK6QXIY_FzDCQFG31rz_O0SCMDEiiLzJHSriVVouYBtoexSUlb6zNuM-t84bnyYNU82b9_F8VAynyJiHn9HuS5lGV6xmtSLEq6Ux_wkWvwdfmKgU1QporPHTpza6EEecsDzeCqGEAS4Sa8WTzZVaA"/>
+      <a
+        routerLink="/login"
+        title="Soy refugio / Iniciar sesión"
+        class="hidden sm:inline-flex items-center justify-center font-label-md text-label-md text-secondary hover:bg-secondary-container hover:text-on-secondary-container px-space-md lg:px-space-lg py-2.5 rounded-full transition-all min-h-[48px]"
+        >Iniciar sesión</a
+      >
+      <a
+        routerLink="/mascotas"
+        class="inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container px-space-md lg:px-space-lg py-2.5 rounded-full transition-all shadow-[0_2px_6px_-1px_rgba(211,84,0,0.2)] active:scale-95 min-h-[48px]"
+        >Quiero Adoptar</a
+      >
+      <a
+        routerLink="/mis-solicitudes"
+        routerLinkActive="cuenta-activa"
+        ariaCurrentWhenActive="page"
+        [attr.aria-label]="
+          'Mis solicitudes de adopción' + (activas() > 0 ? ' (' + activas() + ' activas)' : '')
+        "
+        [attr.title]="
+          'Mis solicitudes de adopción' + (activas() > 0 ? ' (' + activas() + ' activas)' : '')
+        "
+        class="ml-1 inline-flex items-center gap-2 shrink-0 rounded-full p-1 xl:pr-3 hover:bg-surface-container transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      >
+        <span class="relative shrink-0">
+          <img
+            alt="Perfil"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuChR4uvuQn0S8iTDsOFsFxIus5tujWI0YHGWfb0FynYfAkiUSh133SHnatpNEhRX_oy4t5fI8okOo88Jxp66ayQK6QXIY_FzDCQFG31rz_O0SCMDEiiLzJHSriVVouYBtoexSUlb6zNuM-t84bnyYNU82b9_F8VAynyJiHn9HuS5lGV6xmtSLEq6Ux_wkWvwdfmKgU1QporPHTpza6EEecsDzeCqGEAS4Sa8WTzZVaA"
+          />
+          @if (activas() > 0) {
+            <span
+              class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-primary text-on-primary text-[10px] font-bold flex items-center justify-center shadow-sm"
+              aria-hidden="true"
+              >{{ activas() }}</span
+            >
+          }
+        </span>
+        <span
+          class="etiqueta-cuenta hidden xl:inline font-label-md text-label-md text-on-surface-variant whitespace-nowrap"
+          >Mis solicitudes</span
+        >
       </a>
     </div>
   </div>

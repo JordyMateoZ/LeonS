@@ -815,7 +815,16 @@
       class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-md w-[92vw] bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-space-lg py-space-md rounded-xl shadow-xl"
       role="status"
     >
-      {{ mensaje() }}
+      <div class="flex flex-wrap items-center justify-between gap-space-sm">
+        <span>{{ mensaje() }}</span>
+        @if (solicitudCreada()) {
+          <a
+            routerLink="/mis-solicitudes"
+            class="underline font-bold text-inverse-primary hover:no-underline whitespace-nowrap"
+            >Ver mis solicitudes</a
+          >
+        }
+      </div>
     </div>
   }
 </div>

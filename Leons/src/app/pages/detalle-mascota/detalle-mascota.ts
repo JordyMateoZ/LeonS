@@ -14,6 +14,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { Foto, Rasgo } from '../../data/mascotas.data';
 import { MascotasService } from '../../services/mascotas.service';
+import { SolicitudesService } from '../../services/solicitudes.service';
 import {
   Cita,
   Cuidado,
@@ -46,13 +47,13 @@ export class DetalleMascota implements OnDestroy {
 
   private readonly route = inject(ActivatedRoute);
   private readonly servicio = inject(MascotasService);
+  private readonly solicitudesService = inject(SolicitudesService);
   private readonly platformId = inject(PLATFORM_ID);
   private toastTimer?: ReturnType<typeof setTimeout>;
 
-  readonly id = toSignal(
-    this.route.paramMap.pipe(map((p) => Number(p.get('id')))),
-    { initialValue: Number(this.route.snapshot.paramMap.get('id')) || 0 },
-  );
+  readonly id = toSignal(this.route.paramMap.pipe(map((p) => Number(p.get('id')))), {
+    initialValue: Number(this.route.snapshot.paramMap.get('id')) || 0,
+  });
 
   readonly mascota = computed(() => this.servicio.porId(this.id()));
 
@@ -84,6 +85,7 @@ export class DetalleMascota implements OnDestroy {
   readonly favoritos = computed(() => 14 + (this.esFavorito() ? 1 : 0));
   readonly modalAbierto = signal(false);
   readonly mensaje = signal('');
+  readonly solicitudCreada = signal(false);
 
   readonly ficha = computed<Dato[]>(() => {
     const m = this.mascota();
@@ -98,7 +100,13 @@ export class DetalleMascota implements OnDestroy {
         valor: m.especie === 'perro' ? 'Canino' : 'Felino',
         extra: '',
       },
-      { etiqueta: 'Edad', icono: 'cake', iconoClase: 'text-primary', valor: m.edadTexto, extra: '' },
+      {
+        etiqueta: 'Edad',
+        icono: 'cake',
+        iconoClase: 'text-primary',
+        valor: m.edadTexto,
+        extra: '',
+      },
       {
         etiqueta: 'Tamaño / Peso',
         icono: 'straighten',
@@ -188,10 +196,23 @@ export class DetalleMascota implements OnDestroy {
   enviarSolicitud(e: Event) {
     e.preventDefault();
     const m = this.mascota();
+    if (!m) {
+      return;
+    }
+
+    const resultado = this.solicitudesService.crearDesdeMascota(m, this.refugio());
     this.cerrarModal();
-    this.avisar(
-      `¡Solicitud enviada! ${m?.refugio ?? 'El refugio'} te contactará por WhatsApp para coordinar la visita.`,
-    );
+
+    if (resultado.creada) {
+      this.avisar(
+        `¡Solicitud enviada! ${m.refugio} te contactará por WhatsApp para coordinar la visita.`,
+      );
+    } else {
+      this.avisar(
+        `Ya tienes una solicitud activa para ${m.nombre}. Puedes seguir su estado en Mis solicitudes.`,
+      );
+    }
+    this.solicitudCreada.set(true);
   }
 
   async compartir() {
@@ -240,10 +261,14 @@ export class DetalleMascota implements OnDestroy {
   }
 
   private avisar(texto: string) {
+    this.solicitudCreada.set(false);
     this.mensaje.set(texto);
     if (this.toastTimer) {
       clearTimeout(this.toastTimer);
     }
-    this.toastTimer = setTimeout(() => this.mensaje.set(''), 4000);
+    this.toastTimer = setTimeout(() => {
+      this.mensaje.set('');
+      this.solicitudCreada.set(false);
+    }, 6000);
   }
 }

@@ -1,1 +1,13 @@
-.activo { color: #9e3d00 !important; font-weight: 700; background: rgba(255, 219, 205, 0.4); }
+.activo {
+  color: #9e3d00 !important;
+  font-weight: 700;
+  background: rgba(255, 219, 205, 0.4);
+}
+
+.cuenta-activa {
+  background: rgba(255, 219, 205, 0.45);
+}
+.cuenta-activa .etiqueta-cuenta {
+  color: #9e3d00;
+  font-weight: 700;
+}

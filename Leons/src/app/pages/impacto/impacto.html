@@ -1,1 +1,416 @@
-<p>impacto works!</p>
+<div class="flex flex-col w-full">
+  <!-- Sub-bar y breadcrumb -->
+  <div class="w-full bg-surface-container-low/70 py-space-sm">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+      <nav aria-label="Ruta de navegación" class="flex items-center gap-space-xs">
+        <a routerLink="/" class="hover:text-primary transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-base">home</span>
+          <span>Inicio</span>
+        </a>
+        <span class="text-outline">/</span>
+        <span class="font-semibold text-primary">Nuestro Impacto</span>
+      </nav>
+      <div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-1 rounded-full shadow-sm text-secondary">
+        <span class="material-symbols-outlined text-base">verified</span>
+        <span class="font-label-sm text-label-sm font-semibold">Reporte Comunitario Junín</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="w-full py-space-lg lg:py-space-xl overflow-hidden relative">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="bg-surface-container-lowest rounded-3xl shadow-sm p-space-md md:p-space-lg lg:p-space-xl grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-2 bg-linear-to-r from-primary via-secondary to-primary-container"></div>
+
+        <div class="lg:col-span-6 flex flex-col gap-space-md">
+          <div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed w-fit">
+            <span class="material-symbols-outlined text-lg">volunteer_activism</span>
+            <span class="font-label-sm text-label-sm font-bold tracking-wide uppercase">Valle del Mantaro Unido</span>
+          </div>
+
+          <h1 class="font-display text-headline-lg lg:text-display text-on-surface tracking-tight">
+            Cada adopción cambia una vida en
+            <span class="text-primary underline decoration-secondary decoration-wavy decoration-2">Huancayo</span>
+          </h1>
+
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
+            Juntos construimos una comunidad solidaria donde cada colita rescatada encuentra calor de hogar en el Valle del Mantaro. Aquí compartimos con transparencia el fruto de nuestro esfuerzo colectivo.
+          </p>
+
+          <div class="flex items-start gap-space-xs bg-surface-container-low p-space-sm rounded-2xl text-on-surface-variant">
+            <span class="material-symbols-outlined text-secondary text-xl shrink-0 mt-0.5">info</span>
+            <span class="font-body-sm text-body-sm">
+              Cifras calculadas a partir de los {{ totalRefugios() }} refugios aliados. Los testimonios y la serie mensual son ilustrativos.
+            </span>
+          </div>
+
+          <div class="pt-space-xs flex flex-wrap items-center gap-space-sm">
+            <button type="button" (click)="scrollTo('cifras')"
+              class="h-12 px-space-lg rounded-full bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-md hover:bg-primary-container transition-all active:scale-95">
+              <span>Explorar cifras</span>
+              <span class="material-symbols-outlined text-lg">arrow_downward</span>
+            </button>
+            <button type="button" (click)="scrollTo('historias')"
+              class="h-12 px-space-lg rounded-full bg-surface-container text-secondary font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-secondary hover:text-on-secondary transition-all">
+              <span class="material-symbols-outlined text-lg">favorite</span>
+              <span>Ver testimonios</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 relative">
+          <div class="relative rounded-2xl overflow-hidden shadow-md group">
+            <img
+              class="w-full h-auto object-cover max-h-96 transform group-hover:scale-105 transition-transform duration-700 ease-out"
+              alt="Familia huancaína con vestimenta tradicional sonriendo junto a perrito y gatito rescatados en su hogar del Valle del Mantaro"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCetaOwmBq1Xn3fJRicmaqUEh2NyrkTff4Wv8Tlyj7m1lcOMloXasNb3MSo4OCah4Ye5oSG9tab-ViFqfe510vhy6z6_YKq-iinX7k2eg6YNowlrcY1aJMrdr5jW_kJhSNxd5rgPdt7xoychV-nUcBcNk4bIe9B_h90OjfCRftgvx37lmf9w74Ksj5vItBJnN5yyuBKsG17hrLyNQRKanZnAwQYZhA5TbmtsKmpiZIH" />
+            <div class="absolute bottom-0 inset-x-0 p-space-md bg-linear-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent text-surface-container-lowest">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-xl text-primary-fixed">cottage</span>
+                <span class="font-label-md text-label-md">Hogar seguro en San Jerónimo de Tunán</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-surface-container-highest/90">Amor incondicional en las faldas de nuestras montañas andinas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="w-full py-space-md">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+        @for (k of kpis(); track k.title) {
+          <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-space-sm">
+              <div class="size-12 rounded-full flex items-center justify-center" [class]="k.iconBg + ' ' + k.iconColor">
+                <span class="material-symbols-outlined text-3xl">{{ k.icon }}</span>
+              </div>
+              <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full" [class]="k.chipClass">{{ k.chip }}</span>
+            </div>
+            <div>
+              <div class="font-display text-display leading-none tracking-tight" [class]="k.valueColor">{{ k.value }}</div>
+              <div class="font-headline-sm text-headline-sm text-on-surface mt-1">{{ k.title }}</div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">{{ k.text }}</p>
+            </div>
+            <div class="mt-space-md pt-space-xs flex items-center gap-1 font-label-sm text-label-sm" [class]="k.footColor">
+              <span class="material-symbols-outlined text-base">{{ k.footIcon }}</span>
+              <span>{{ k.footLabel }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+
+  <section id="cifras" class="w-full py-space-xl">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col gap-space-lg">
+      <div class="max-w-2xl flex flex-col gap-space-xs">
+        <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Transparencia y Resultados</span>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface">Cifras de nuestra comunidad</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          Gráficos claros y comprensibles que reflejan cómo crece el amor animal en los diferentes distritos wankas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
+        <div class="lg:col-span-7 bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Adopciones por mes (2024)</h3>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">Primer semestre en alza continua</span>
+              </div>
+              <div class="p-2 bg-primary-fixed/40 rounded-full text-primary">
+                <span class="material-symbols-outlined text-xl">bar_chart</span>
+              </div>
+            </div>
+
+            <div class="mt-space-lg w-full">
+              <svg viewBox="0 0 540 220" class="w-full h-auto" role="img" aria-label="Gráfico de barras de adopciones mensuales">
+                @for (t of yTicks; track t.v) {
+                  <line x1="40" x2="520" [attr.y1]="t.y" [attr.y2]="t.y"
+                    class="stroke-surface-container-highest" [attr.stroke-width]="t.v === 0 ? 1.5 : 1"
+                    [attr.stroke-dasharray]="t.v === 0 ? null : 4"></line>
+                  <text x="32" [attr.y]="t.y + 4" text-anchor="end" font-size="11" class="font-body-md fill-on-surface-variant">{{ t.v }}</text>
+                }
+                @for (b of bars(); track b.m) {
+                  <rect width="46" rx="8" [attr.x]="b.x" [attr.y]="b.y" [attr.height]="b.h"
+                    [class]="b.record ? 'fill-primary' : 'fill-primary-fixed-dim'"></rect>
+                  <text text-anchor="middle" class="font-body-md fill-primary" [attr.x]="b.cx" [attr.y]="b.y - 8"
+                    [attr.font-size]="b.record ? 13 : 12" [attr.font-weight]="b.record ? 800 : 700">{{ b.v }}{{ b.record ? ' ★' : '' }}</text>
+                  <text text-anchor="middle" font-size="12" class="font-body-md"
+                    [class]="b.record ? 'fill-on-surface' : 'fill-on-surface-variant'" [attr.x]="b.cx" y="200"
+                    [attr.font-weight]="b.record ? 700 : 400">{{ b.m }}</text>
+                }
+              </svg>
+            </div>
+          </div>
+
+          <div class="mt-space-md p-space-sm bg-surface-container-low rounded-xl flex items-center gap-space-xs text-on-surface-variant">
+            <span class="material-symbols-outlined text-primary text-xl shrink-0">event_note</span>
+            <p class="font-body-sm text-body-sm">
+              <strong class="text-on-surface">Hito histórico:</strong> En junio alcanzamos el récord de 97 colitas gracias a la feria 'Huancayo Adopta' en el Parque Huamanmarca.
+            </p>
+          </div>
+        </div>
+        <div class="lg:col-span-5 bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Especies en adopción</h3>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">Distribución actual del catálogo</span>
+              </div>
+              <div class="p-2 bg-secondary-container/50 rounded-full text-secondary">
+                <span class="material-symbols-outlined text-xl">pie_chart</span>
+              </div>
+            </div>
+
+            <div class="mt-space-md flex flex-col sm:flex-row items-center justify-center gap-space-md py-space-sm">
+              <div class="relative size-40 flex items-center justify-center shrink-0">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100" role="img" aria-label="Distribución de especies en adopción">
+                  <circle cx="50" cy="50" r="38" fill="none" stroke-width="16" class="stroke-surface-container-low"></circle>
+                  @for (s of donutSegments(); track s.stroke) {
+                    <circle cx="50" cy="50" r="38" fill="none" stroke-width="16" [class]="s.stroke"
+                      [attr.stroke-dasharray]="s.dash" [attr.stroke-dashoffset]="s.offset"></circle>
+                  }
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <span class="font-headline-lg text-headline-lg text-on-surface leading-none font-bold">{{ totalMascotas() }}</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total</span>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-space-sm w-full">
+                @for (s of species(); track s.name) {
+                  <div class="p-space-sm bg-surface rounded-xl">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-space-xs">
+                        <div class="size-3.5 rounded-full" [class]="s.dot"></div>
+                        <span class="font-label-md text-label-md text-on-surface">{{ s.name }}</span>
+                      </div>
+                      <span class="font-headline-sm text-headline-sm font-bold" [class]="s.color">{{ s.pct }}%</span>
+                    </div>
+                    <div class="font-body-sm text-body-sm text-on-surface-variant pl-5">{{ s.detail }}</div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-space-md p-space-sm bg-surface-container-low rounded-xl text-on-surface-variant font-body-sm text-body-sm">
+            La red atiende tanto a caninos como a felinos; cada refugio define sus especies y protocolos de adopción responsables.
+          </div>
+        </div>
+
+        <div class="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs mb-space-md">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">Adopciones por distrito en la provincia</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Huancayo Metropolitano y zonas aledañas del Mantaro</p>
+            </div>
+            <div class="inline-flex items-center gap-1 bg-surface-container px-space-sm py-1 rounded-full text-on-surface font-label-sm text-label-sm">
+              <span class="material-symbols-outlined text-base text-primary">pin_drop</span>
+              <span>{{ totalDistritos() }} Distritos cubiertos</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-space-md">
+            @for (d of districts(); track d.name) {
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between items-center font-label-md text-label-md">
+                  <span class="text-on-surface font-semibold flex items-center gap-space-sm">
+                    <span class="material-symbols-outlined text-lg" [class]="d.iconColor">{{ d.icon }}</span>
+                    {{ d.name }}
+                  </span>
+                  <span class="font-bold" [class]="d.labelColor">{{ d.count }} adopciones ({{ d.pct }}%)</span>
+                </div>
+                <div class="w-full bg-surface-container-low h-4 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full transition-all duration-1000" [class]="d.bar" [style.width.%]="d.pct"></div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="mt-space-md p-space-sm bg-surface-container rounded-xl flex items-center gap-space-xs text-on-surface font-body-sm text-body-sm">
+            <span class="material-symbols-outlined text-secondary text-xl shrink-0">check_circle</span>
+            <span>El Tambo lidera la acogida entre los distritos metropolitanos, seguido de Huancayo Centro y Chilca. La red suma {{ totalAdoptadas() }} adopciones registradas.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="historias" class="w-full py-space-xl bg-surface-container-low/50">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col gap-space-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+        <div class="max-w-xl flex flex-col gap-space-xs">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Vidas Transformadas</span>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">Historias de adopción</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Detrás de cada estadística hay un corazón noble que eligió transformar el miedo en alegría. Conoce tres testimonios del Valle.
+          </p>
+        </div>
+        <div class="text-primary font-label-md text-label-md flex items-center gap-1">
+          <span class="material-symbols-outlined text-xl">auto_stories</span>
+          <span>{{ totalAdoptadas() }} historias reales</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg">
+        @for (s of stories; track s.name) {
+          <article class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+            <div class="relative h-60 overflow-hidden bg-surface-container">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" [src]="s.img" [alt]="s.alt" />
+              <div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded-full text-on-surface font-label-sm text-label-sm shadow-sm flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary text-base">location_on</span>
+                <span>{{ s.place }}</span>
+              </div>
+              <div class="absolute bottom-3 right-3 bg-primary text-on-primary px-space-sm py-1 rounded-full font-label-sm text-label-sm font-bold shadow-sm">
+                {{ s.badge }}
+              </div>
+            </div>
+
+            <div class="p-space-md md:p-space-lg flex-1 flex flex-col justify-between gap-space-md">
+              <div class="flex flex-col gap-space-sm">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-headline-md text-headline-md text-on-surface">{{ s.name }}</h3>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-sm py-1 rounded-full">
+                    Adoptante: {{ s.adopter }}
+                  </span>
+                </div>
+                <div class="flex flex-col gap-space-xs pt-space-xs">
+                  <div class="p-space-xs bg-error-container/40 rounded-xl flex items-start gap-space-xs">
+                    <span class="px-2 py-0.5 rounded-md bg-error text-on-error font-label-sm text-label-sm uppercase shrink-0">Antes</span>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">{{ s.before }}</span>
+                  </div>
+                  <div class="p-space-xs bg-secondary-container/40 rounded-xl flex items-start gap-space-xs">
+                    <span class="px-2 py-0.5 rounded-md bg-secondary text-on-secondary font-label-sm text-label-sm uppercase shrink-0">Después</span>
+                    <span class="font-body-sm text-body-sm text-on-surface">{{ s.after }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-space-sm flex items-center gap-space-xs font-label-sm text-label-sm" [class]="s.footColor">
+                <span class="material-symbols-outlined text-lg">{{ s.footIcon }}</span>
+                <span>{{ s.footLabel }}</span>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+
+  <section class="w-full py-space-xl">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg flex flex-col gap-space-lg">
+      <div class="text-center max-w-2xl mx-auto flex flex-col gap-space-xs">
+        <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Participación Comunitaria</span>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface">Tu aporte cuenta — ¿Cómo puedes ayudar?</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          No todos pueden adoptar, pero todos podemos sumar un granito de arena para que más animales en Huancayo vivan con dignidad.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg">
+        <!-- Adoptar -->
+        <div class="bg-surface-container-lowest rounded-3xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md">
+          <div class="flex flex-col gap-space-sm">
+            <div class="size-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-3xl">pets</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface">Adoptar</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Dale una segunda oportunidad a un peludito que espera por ti en los albergues de Huancayo, El Tambo o Chilca.
+            </p>
+          </div>
+          <a routerLink="/mascotas"
+            class="w-full h-12 rounded-full bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-primary-container transition-all shadow-sm active:scale-95">
+            <span>Ver catálogo</span>
+            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+          </a>
+        </div>
+
+
+        <div class="bg-surface-container-lowest rounded-3xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md">
+          <div class="flex flex-col gap-space-sm">
+            <div class="size-14 rounded-2xl bg-secondary-container flex items-center justify-center text-secondary">
+              <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface">Ser voluntario</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Ayuda en jornadas de baño, rescate de fin de semana o brinda hogar temporal solidario en tu propio distrito.
+            </p>
+            @if (volunteerNotice()) {
+              <div class="p-space-sm bg-secondary-container/40 rounded-xl text-on-surface font-body-sm text-body-sm" role="status">
+                ¡Gracias por tu vocación! Escríbenos directamente a adopciones@leons-huancayo.pe o acércate a la sede El Tambo.
+              </div>
+            }
+          </div>
+          <button type="button" (click)="toggleVolunteerNotice()" [attr.aria-expanded]="volunteerNotice()"
+            class="w-full h-12 rounded-full bg-surface-container text-secondary font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-secondary hover:text-on-secondary transition-all">
+            <span>Quiero ser voluntario</span>
+            <span class="material-symbols-outlined text-lg">person_add</span>
+          </button>
+        </div>
+
+
+        <div class="bg-surface-container-lowest rounded-3xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md">
+          <div class="flex flex-col gap-space-sm">
+            <div class="size-14 rounded-2xl bg-surface-container-high flex items-center justify-center text-on-surface">
+              <span class="material-symbols-outlined text-3xl">share</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface">Compartir</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Pasa la voz en WhatsApp y redes sociales. Cada foto compartida acerca a un rescatado a su nueva familia adoptiva.
+            </p>
+          </div>
+          <a [href]="whatsappShareUrl" target="_blank" rel="noopener noreferrer"
+            class="w-full h-12 rounded-full bg-secondary text-on-secondary font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-secondary/90 transition-all shadow-sm">
+            <span>Compartir en WhatsApp</span>
+            <span class="material-symbols-outlined text-lg">chat</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="w-full pb-space-xl">
+    <div class="max-w-7xl mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+      <div class="rounded-3xl bg-linear-to-r from-primary via-primary-container to-tertiary p-space-lg md:p-space-xl text-on-primary shadow-md relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 size-64 bg-on-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -left-10 -top-10 size-48 bg-secondary-fixed/20 rounded-full blur-xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-space-lg text-center lg:text-left">
+          <div class="max-w-xl flex flex-col gap-space-xs">
+            <div class="inline-flex items-center gap-1 bg-on-primary/20 backdrop-blur-md px-space-sm py-1 rounded-full font-label-sm text-label-sm w-fit mx-auto lg:mx-0">
+              <span class="material-symbols-outlined text-base">celebration</span>
+              <span>¡Súmate al cambio hoy!</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-primary font-bold">¡El próximo final feliz puede empezar contigo!</h2>
+            <p class="font-body-md text-body-md text-on-primary/90">
+              Cientos de perritos y gatitos en el Valle del Mantaro están listos para llenar tu casa de sonrisas, lealtad y calor.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-space-sm w-full lg:w-auto shrink-0">
+            <a routerLink="/mascotas"
+              class="w-full sm:w-auto h-14 px-space-xl rounded-full bg-surface-container-lowest text-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-md hover:bg-surface-container transition-all active:scale-95">
+              <span class="material-symbols-outlined text-xl">pets</span>
+              <span>Ver mascotas disponibles</span>
+            </a>
+            <a routerLink="/refugios"
+              class="w-full sm:w-auto h-14 px-space-lg rounded-full bg-on-primary/10 text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-on-primary/20 transition-all backdrop-blur-sm">
+              <span class="material-symbols-outlined text-xl">home_work</span>
+              <span>Conocer refugios aliados</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

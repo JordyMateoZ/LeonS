@@ -13,8 +13,21 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/login/login').then((m) => m.Login),
   },
   {
+    path: 'mis-solicitudes',
+    loadComponent: () =>
+      import('./pages/mis-solicitudes/mis-solicitudes').then((m) => m.MisSolicitudes),
+  },
+  {
+    path: 'impacto',
+    loadComponent: () => import('./pages/impacto/impacto').then((m) => m.Impacto),
+  },
+  {
+    path: 'sobre-nosotros',
+    loadComponent: () => import('./pages/nosotros/nosotros').then((m) => m.Nosotros),
+  },
+  { path: 'nosotros', redirectTo: 'sobre-nosotros', pathMatch: 'full' },
+  {
     path: 'como-funciona',
     loadComponent: () => import('./pages/como-funciona/como-funciona').then((m) => m.ComoFunciona),
   },
-  // las demás páginas se agregan igual a medida que las creen
 ];

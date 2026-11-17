@@ -1,2 +1,4 @@
 # LeonS
 Project - Web Programming, C-04
+#MATEO JULCAMANYAN JORDY
+#NAVARRO SOLORZANO JOSÉ

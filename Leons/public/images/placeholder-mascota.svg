@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Imagen no disponible</title>
+  <desc id="descripcion">Ilustracion neutral de una huella cuando no hay fotografia verificada de la mascota.</desc>
+  <rect width="640" height="480" fill="#eef2f3"/>
+  <rect x="18" y="18" width="604" height="444" rx="22" fill="none" stroke="#c9d3d6" stroke-width="3" stroke-dasharray="12 10"/>
+  <g fill="#9aa9ae">
+    <ellipse cx="320" cy="288" rx="112" ry="88"/>
+    <ellipse cx="220" cy="196" rx="34" ry="46" transform="rotate(-25 220 196)"/>
+    <ellipse cx="282" cy="158" rx="34" ry="48" transform="rotate(-8 282 158)"/>
+    <ellipse cx="358" cy="158" rx="34" ry="48" transform="rotate(8 358 158)"/>
+    <ellipse cx="420" cy="196" rx="34" ry="46" transform="rotate(25 420 196)"/>
+  </g>
+  <text x="320" y="418" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="2" fill="#5f6d72">IMAGEN NO DISPONIBLE</text>
+</svg>

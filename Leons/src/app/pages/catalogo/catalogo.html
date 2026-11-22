@@ -329,7 +329,7 @@
           >{{ filtradas().length }} de {{ totalMascotas }}</span
         >
         <span class="font-body-md text-body-md text-on-surface-variant"
-          >amigos listos para adopción</span
+          >mascotas disponibles en la plataforma</span
         >
       </div>
       <div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
@@ -391,6 +391,7 @@
         >
           <div class="relative w-full aspect-[4/3] overflow-hidden bg-surface-container">
             <img
+              appFotoFallback
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               [alt]="m.alt"
               [src]="m.foto"
@@ -630,6 +631,11 @@
         @if (alertaMensaje()) {
           <p class="font-label-md text-label-md text-secondary mt-space-sm">
             {{ alertaMensaje() }}
+          </p>
+        }
+        @if (favoritosError()) {
+          <p role="alert" class="font-label-md text-label-md text-error mt-space-sm">
+            {{ favoritosError() }}
           </p>
         }
       </div>

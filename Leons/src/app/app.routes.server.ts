@@ -1,20 +1,12 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
-import { MASCOTAS } from './data/mascotas.data';
-import { REFUGIOS } from './data/refugios.data';
 
 export const serverRoutes: ServerRoute[] = [
-  {
-    path: 'mascotas/:id',
-    renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => MASCOTAS.map((m) => ({ id: String(m.id) })),
-  },
-  {
-    path: 'refugios/:id',
-    renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => REFUGIOS.map((r) => ({ id: r.id })),
-  },
-  {
-    path: '**',
-    renderMode: RenderMode.Prerender,
-  },
+  { path: 'mascotas', renderMode: RenderMode.Server },
+  { path: 'mascotas/:id', renderMode: RenderMode.Server },
+  { path: 'refugios', renderMode: RenderMode.Server },
+  { path: 'refugios/:id', renderMode: RenderMode.Server },
+  // Ruta privada: nunca prerenderizar; el servidor emite solo un shell neutro
+  // y la autorización se resuelve en el navegador tras `/auth/me`.
+  { path: 'mis-solicitudes', renderMode: RenderMode.Server },
+  { path: '**', renderMode: RenderMode.Prerender },
 ];

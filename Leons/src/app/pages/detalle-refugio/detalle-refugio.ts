@@ -5,10 +5,11 @@ import { map } from 'rxjs';
 import { ESTADOS_MASCOTA, Mascota } from '../../data/mascotas.data';
 import { Refugio } from '../../data/refugios.data';
 import { MascotasService } from '../../services/mascotas.service';
+import { FotoFallbackDirective } from '../../core/imagenes/foto-fallback.directive';
 
 @Component({
   selector: 'app-detalle-refugio',
-  imports: [RouterLink],
+  imports: [RouterLink, FotoFallbackDirective],
   templateUrl: './detalle-refugio.html',
   styleUrl: './detalle-refugio.css',
 })

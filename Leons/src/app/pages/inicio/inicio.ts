@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MascotasService } from '../../services/mascotas.service';
+import { FotoFallbackDirective } from '../../core/imagenes/foto-fallback.directive';
 
 @Component({
   selector: 'app-inicio',
-  imports: [RouterLink],
+  imports: [RouterLink, FotoFallbackDirective],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
@@ -57,7 +58,7 @@ export class Inicio {
       icono: 'home',
       color: 'text-primary-fixed-dim',
       valor: `${this.mascotasService.totalAdoptadas}`,
-      texto: 'Mascotas con hogar definitivo',
+      texto: 'Adopciones acumuladas reportadas por los refugios',
     },
     {
       icono: 'volunteer_activism',
@@ -69,7 +70,7 @@ export class Inicio {
       icono: 'health_and_safety',
       color: 'text-primary-fixed-dim',
       valor: `${this.mascotasService.totalEnAcogida}`,
-      texto: 'Mascotas en acogida temporal',
+      texto: 'Mascotas en acogida reportadas por los refugios',
     },
     {
       icono: 'map',

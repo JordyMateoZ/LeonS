@@ -21,6 +21,15 @@ describe('Impacto', () => {
     expect(component).toBeTruthy();
   });
 
+  it('distingue los registros actuales de los contadores reportados', () => {
+    const titulos = component.kpis().map((k) => k.title);
+
+    expect(titulos).toContain('Adopciones acumuladas reportadas por los refugios');
+    expect(titulos).toContain('Mascotas en acogida reportadas por los refugios');
+    expect(fixture.nativeElement.textContent).toContain('Mascotas disponibles en la plataforma');
+    expect(fixture.nativeElement.textContent).toContain('adopciones registradas en LeonS');
+  });
+
   it('should render the real network metrics', () => {
     const texto = fixture.nativeElement.textContent;
 

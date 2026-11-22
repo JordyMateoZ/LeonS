@@ -1,9 +1,11 @@
-import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
+import { Component, OnDestroy, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Solicitud } from '../../data/solicitudes.data';
+import { AuthService } from '../../core/auth/auth.service';
 import { SolicitudesService } from '../../services/solicitudes.service';
+import { FotoFallbackDirective } from '../../core/imagenes/foto-fallback.directive';
 
-type Filtro = 'all' | 'active' | 'completed';
+type Filtro = 'all' | 'active' | 'completed' | 'cancelled';
 
 interface Consejo {
   icono: string;
@@ -14,12 +16,14 @@ interface Consejo {
 
 @Component({
   selector: 'app-mis-solicitudes',
-  imports: [RouterLink],
+  imports: [RouterLink, FotoFallbackDirective],
   templateUrl: './mis-solicitudes.html',
   styleUrl: './mis-solicitudes.css',
 })
 export class MisSolicitudes implements OnDestroy {
   private readonly servicio = inject(SolicitudesService);
+  readonly auth = inject(AuthService);
+  private cargandoSesion = false;
 
   readonly fill1 = "'FILL' 1";
   readonly soporteWhatsapp = 'https://wa.me/51964000111';
@@ -66,6 +70,8 @@ export class MisSolicitudes implements OnDestroy {
   filtro = signal<Filtro>('all');
   vacio = signal(false);
   aCancelar = signal<Solicitud | null>(null);
+  motivoSeleccionado = signal(this.motivos[0]);
+  cancelando = signal(false);
   mensaje = signal('');
 
   private mensajeTimer?: ReturnType<typeof setTimeout>;
@@ -77,13 +83,37 @@ export class MisSolicitudes implements OnDestroy {
   readonly total = this.servicio.total;
   readonly enProceso = this.servicio.activas;
   readonly finalizadas = this.servicio.finalizadas;
+  readonly canceladas = this.servicio.canceladas;
   readonly mostrarVacio = computed(() => this.vacio() || this.visibles().length === 0);
 
   readonly pestanas = computed<{ valor: Filtro; etiqueta: string }[]>(() => [
     { valor: 'all', etiqueta: `Todas (${this.total()})` },
     { valor: 'active', etiqueta: `En proceso (${this.enProceso()})` },
     { valor: 'completed', etiqueta: `Finalizadas (${this.finalizadas()})` },
+    { valor: 'cancelled', etiqueta: `Canceladas (${this.canceladas()})` },
   ]);
+
+  constructor() {
+    // La ruta puede renderizarse en SSR sin sesión. En el navegador, la carga
+    // privada se dispara cuando /auth/me confirma la identidad, una sola vez.
+    effect(() => {
+      if (!this.auth.isAuthenticated()) {
+        this.cargandoSesion = false;
+        return;
+      }
+      if (this.cargandoSesion) {
+        return;
+      }
+      this.cargandoSesion = true;
+      void this.servicio.cargar().finally(() => {
+        this.cargandoSesion = false;
+      });
+    });
+  }
+
+  revalidar(): void {
+    void this.auth.revalidar();
+  }
 
   cambiarFiltro(f: Filtro) {
     this.vacio.set(false);
@@ -108,14 +138,20 @@ export class MisSolicitudes implements OnDestroy {
     this.aCancelar.set(null);
   }
 
-  confirmarCancelacion() {
+  async confirmarCancelacion() {
     const s = this.aCancelar();
-    if (!s) {
+    if (!s || this.cancelando()) {
       return;
     }
-    this.servicio.cancelar(s.id);
-    this.cerrarCancelar();
-    this.avisar('Tu solicitud fue cancelada y el albergue será notificado.');
+    this.cancelando.set(true);
+    const ok = await this.servicio.cancelar(s.id, this.motivoSeleccionado());
+    this.cancelando.set(false);
+    if (ok) {
+      this.cerrarCancelar();
+      this.avisar('Tu solicitud fue cancelada y el albergue será notificado.');
+    } else {
+      this.avisar(this.servicio.error() ?? 'No se pudo cancelar la solicitud. Intenta de nuevo.');
+    }
   }
 
   ngOnDestroy() {

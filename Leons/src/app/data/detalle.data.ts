@@ -22,25 +22,6 @@ export interface Cita {
   autor: string;
 }
 
-const RASGO_BASE = 'inline-flex items-center gap-1.5 font-label-md text-label-md px-4 py-2.5 rounded-full ';
-
-const RASGOS_POR_ESPECIE: Record<'perro' | 'gato', Rasgo[]> = {
-  perro: [
-    { icono: 'toys', texto: 'Juguetón y cariñoso', clase: RASGO_BASE + 'bg-primary-fixed text-on-primary-fixed shadow-sm', iconoClase: '' },
-    { icono: 'chair', texto: 'Tranquilo en interiores', clase: RASGO_BASE + 'bg-surface-container text-on-surface', iconoClase: 'text-secondary' },
-    { icono: 'family_restroom', texto: 'Excelente con niños', clase: RASGO_BASE + 'bg-secondary-container text-on-secondary-container shadow-sm', iconoClase: '' },
-    { icono: 'group', texto: 'Sociable con otros perros', clase: RASGO_BASE + 'bg-surface-container text-on-surface', iconoClase: 'text-primary' },
-    { icono: 'nordic_walking', texto: 'Acostumbrado a paseos con correa', clase: RASGO_BASE + 'bg-surface-container text-on-surface', iconoClase: 'text-secondary' },
-  ],
-  gato: [
-    { icono: 'favorite', texto: 'Cariñoso y ronroneador', clase: RASGO_BASE + 'bg-primary-fixed text-on-primary-fixed shadow-sm', iconoClase: '' },
-    { icono: 'chair', texto: 'Disfruta espacios tranquilos', clase: RASGO_BASE + 'bg-surface-container text-on-surface', iconoClase: 'text-secondary' },
-    { icono: 'group', texto: 'Sociable con otros gatos', clase: RASGO_BASE + 'bg-surface-container text-on-surface', iconoClase: 'text-primary' },
-    { icono: 'cleaning_services', texto: 'Limpio con su arenero', clase: RASGO_BASE + 'bg-secondary-container text-on-secondary-container shadow-sm', iconoClase: '' },
-    { icono: 'apartment', texto: 'Se adapta a departamento', clase: RASGO_BASE + 'bg-surface-container text-on-surface', iconoClase: 'text-secondary' },
-  ],
-};
-
 export const REQUISITOS: Requisito[] = [
   {
     icono: 'home_work',
@@ -88,8 +69,16 @@ const CUIDADOS_ESPECIALES: Record<number, Cuidado[]> = {
   ],
 };
 
+/**
+ * Rasgos individuales verificados de la mascota.
+ *
+ * Antes se devolvían cinco rasgos genéricos por especie cuando no había
+ * registro; eso pintaba como comportamiento documentado de la mascota un texto
+ * simulado. Ahora una colección vacía significa «pendiente de evaluación» y la
+ * plantilla se encarga de comunicarlo.
+ */
 export function rasgosDe(m: Mascota): Rasgo[] {
-  return m.rasgos ?? RASGOS_POR_ESPECIE[m.especie];
+  return m.rasgos ?? [];
 }
 
 export function historiaDe(m: Mascota): string[] {

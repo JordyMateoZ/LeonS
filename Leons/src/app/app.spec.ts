@@ -1,12 +1,36 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { vi } from 'vitest';
+
+import { AuthService } from './core/auth/auth.service';
+import { SolicitudesService } from './services/solicitudes.service';
 import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthenticated: () => false,
+            sesionPendiente: () => false,
+            usuario: signal(null).asReadonly(),
+            cerrarSesion: vi.fn(),
+          },
+        },
+        {
+          provide: SolicitudesService,
+          useValue: { activas: signal(0).asReadonly() },
+        },
+      ],
     })
       .compileComponents();
   });

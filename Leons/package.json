@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "serve:e2e": "ng serve --configuration e2e --port 4300",
+    "e2e": "playwright test --config=playwright.e2e.config.ts",
     "serve:ssr:Leons": "node dist/Leons/server/server.mjs"
   },
   "private": true,
@@ -28,6 +30,7 @@
     "@angular/build": "^22.2.2",
     "@angular/cli": "^22.2.2",
     "@angular/compiler-cli": "^22.2.0",
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.12.0",

@@ -3,6 +3,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { MascotasService } from '../../services/mascotas.service';
+import { FavoritosService } from '../../services/favoritos.service';
+import { FotoFallbackDirective } from '../../core/imagenes/foto-fallback.directive';
 
 type Orden = 'recent' | 'urgent' | 'youngest' | 'oldest';
 
@@ -14,12 +16,14 @@ interface Opcion {
 
 @Component({
   selector: 'app-catalogo',
-  imports: [RouterLink],
+  imports: [RouterLink, FotoFallbackDirective],
   templateUrl: './catalogo.html',
   styleUrl: './catalogo.css',
 })
 export class Catalogo {
   private readonly mascotasService = inject(MascotasService);
+  private readonly favoritosService = inject(FavoritosService);
+  readonly favoritosError = this.favoritosService.error;
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
@@ -80,7 +84,6 @@ export class Catalogo {
   orden = signal<Orden>('recent');
 
   // Otros estados interactivos
-  favoritos = signal<ReadonlySet<number>>(new Set<number>());
   paginaActual = signal(1);
   alertaMensaje = signal('');
 
@@ -187,14 +190,11 @@ export class Catalogo {
   }
 
   esFavorito(id: number): boolean {
-    return this.favoritos().has(id);
+    return this.favoritosService.esFavorito(id);
   }
 
   alternarFavorito(id: number) {
-    const nuevo = new Set(this.favoritos());
-    if (nuevo.has(id)) nuevo.delete(id);
-    else nuevo.add(id);
-    this.favoritos.set(nuevo);
+    void this.favoritosService.alternar(id);
   }
 
   irAPagina(n: number) {

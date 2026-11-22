@@ -93,7 +93,7 @@ export class Refugios {
       iconoClase: 'text-secondary',
       valorClase: 'text-secondary',
       valor: `${this.mascotasService.totalAdoptadas}`,
-      texto: 'Vidas Transformadas en Hogares',
+      texto: 'Adopciones acumuladas reportadas por los refugios',
     },
     {
       icono: 'health_and_safety',
@@ -101,7 +101,7 @@ export class Refugios {
       iconoClase: 'text-on-surface',
       valorClase: 'text-on-surface',
       valor: `${this.mascotasService.totalEnAcogida}`,
-      texto: 'Mascotas en Acogida Temporal',
+      texto: 'Mascotas en acogida reportadas por los refugios',
     },
     {
       icono: 'map',

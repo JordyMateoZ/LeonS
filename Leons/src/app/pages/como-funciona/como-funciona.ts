@@ -1,7 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { REQUISITOS } from '../../data/detalle.data';
-import { FAQS, PASOS_ADOPCION, PASOS_REFUGIO } from '../../data/contenido.data';
+import { ContenidoService } from '../../services/contenido.service';
 
 @Component({
   selector: 'app-como-funciona',
@@ -10,12 +9,14 @@ import { FAQS, PASOS_ADOPCION, PASOS_REFUGIO } from '../../data/contenido.data';
   styleUrl: './como-funciona.css',
 })
 export class ComoFunciona {
+  private readonly contenido = inject(ContenidoService);
+
   readonly fill1 = "'FILL' 1";
 
-  readonly pasos = PASOS_ADOPCION;
-  readonly pasosRefugio = PASOS_REFUGIO;
-  readonly requisitos = REQUISITOS;
-  readonly faqs = FAQS;
+  readonly pasos = this.contenido.pasosAdopcion;
+  readonly pasosRefugio = this.contenido.pasosRefugio;
+  readonly requisitos = this.contenido.requisitos;
+  readonly faqs = this.contenido.faqs;
 
   faqAbierta = signal<number | null>(0);
 

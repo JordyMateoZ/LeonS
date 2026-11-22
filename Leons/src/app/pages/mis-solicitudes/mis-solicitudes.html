@@ -32,6 +32,28 @@
         </a>
       </div>
 
+      @if (!auth.isAuthenticated()) {
+        <div role="status" aria-live="polite"
+          class="flex flex-wrap items-center justify-between gap-space-md bg-surface-container-low text-on-surface-variant rounded-2xl px-space-lg py-space-md">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-primary">verified_user</span>
+            <span>
+              @if (auth.sesionPendiente()) {
+                Verificando tu sesión antes de mostrar tus solicitudes…
+              } @else {
+                Tu sesión no está confirmada. No se mostrarán datos privados.
+              }
+            </span>
+          </div>
+          @if (auth.errorSesion()) {
+            <button type="button" (click)="revalidar()"
+              class="inline-flex items-center gap-2 bg-primary text-on-primary font-label-md px-space-md py-2 rounded-full min-h-[44px]">
+              <span class="material-symbols-outlined text-base">refresh</span>
+              Reintentar verificación
+            </button>
+          }
+        </div>
+      }
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter mt-space-sm">
         <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex items-center gap-space-md">
@@ -88,7 +110,7 @@
         <!-- ESTADO VACÍO -->
         <div class="lg:col-span-8 bg-surface-container-lowest rounded-2xl shadow-sm p-space-xl flex flex-col items-center justify-center text-center">
           <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden mb-space-lg flex items-center justify-center bg-surface-container-low p-4">
-            <img alt="Perrito esperando con ilusión junto a la ventana andina" class="w-full h-full object-contain drop-shadow-sm rounded-xl" [src]="fotoVacio"/>
+            <img appFotoFallback alt="Perrito esperando con ilusión junto a la ventana andina" class="w-full h-full object-contain drop-shadow-sm rounded-xl" [src]="fotoVacio"/>
           </div>
           <div class="max-w-lg flex flex-col items-center gap-space-sm">
             <span class="inline-flex items-center gap-1.5 bg-primary-fixed text-primary font-label-sm text-label-sm px-3 py-1 rounded-full font-bold">
@@ -125,7 +147,7 @@
               <div class="p-space-lg md:p-space-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md bg-gradient-to-r" [class]="s.headerClase">
                 <div class="flex items-center gap-space-md">
                   <div class="relative w-20 h-20 rounded-2xl overflow-hidden shrink-0 shadow-inner">
-                    <img class="w-full h-full object-cover" [src]="s.fotoSrc" [alt]="s.fotoAlt"/>
+                    <img appFotoFallback class="w-full h-full object-cover" [src]="s.fotoSrc" [alt]="s.fotoAlt"/>
                     <span class="absolute bottom-1 right-1 p-0.5 rounded-full shadow-sm flex items-center justify-center" [class]="s.iconoMiniClase">
                       <span class="material-symbols-outlined text-xs">{{ s.iconoMini }}</span>
                     </span>
@@ -374,9 +396,10 @@
         </div>
         <div class="flex flex-col gap-2 mt-2">
           <label class="font-label-sm text-label-sm text-on-surface font-bold" for="motivo">Motivo principal (opcional):</label>
-          <select id="motivo" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm p-3 rounded-xl focus:outline-none">
+          <select id="motivo" [value]="motivoSeleccionado()" (change)="motivoSeleccionado.set($any($event.target).value)"
+            class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm p-3 rounded-xl focus:outline-none">
             @for (m of motivos; track m) {
-              <option>{{ m }}</option>
+              <option [value]="m">{{ m }}</option>
             }
           </select>
         </div>
@@ -385,8 +408,8 @@
             class="px-space-md py-2.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors min-h-[48px]">
             No, mantener solicitud
           </button>
-          <button type="button" (click)="confirmarCancelacion()"
-            class="px-space-lg py-2.5 rounded-full bg-error text-on-error font-label-md text-label-md hover:opacity-90 transition-opacity min-h-[48px] shadow-sm">
+          <button type="button" (click)="confirmarCancelacion()" [disabled]="cancelando()"
+            class="px-space-lg py-2.5 rounded-full bg-error text-on-error font-label-md text-label-md hover:opacity-90 transition-opacity min-h-[48px] shadow-sm disabled:opacity-60 disabled:cursor-not-allowed">
             Sí, cancelar postulación
           </button>
         </div>

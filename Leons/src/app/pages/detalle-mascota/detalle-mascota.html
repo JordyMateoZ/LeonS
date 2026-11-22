@@ -3,6 +3,35 @@
     class="w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary-container opacity-70"
   ></div>
 
+  @if (usandoRespaldo() && mascota()) {
+    <div
+      class="w-full bg-secondary-container/40 text-on-secondary-container font-label-md text-label-md px-margin md:px-margin-md py-space-xs flex flex-wrap items-center justify-center gap-space-sm"
+      role="status"
+      data-estado-respaldo="true"
+    >
+      <span>{{
+        errorDetalle() ?? 'Datos de respaldo: no pudimos verificarlos con la API.'
+      }}</span>
+      <button
+        type="button"
+        (click)="recargarTodo()"
+        class="inline-flex items-center gap-1 rounded-full border border-current px-space-md py-1 font-bold hover:bg-secondary-container/60 transition-colors"
+      >
+        <span class="material-symbols-outlined text-base">refresh</span>
+        <span>Reintentar</span>
+      </button>
+    </div>
+  }
+
+  @if (apiDisponible() || errorDetalle()) {
+    <span
+      class="sr-only"
+      role="status"
+      [attr.data-estado-detalle]="apiDisponible() ? 'api' : 'error'"
+      >{{ errorDetalle() ?? '' }}</span
+    >
+  }
+
   @if (mascota(); as m) {
     <section class="w-full bg-surface-container-lowest">
       <div
@@ -54,6 +83,7 @@
               class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container-high shadow-md group"
             >
               <img
+                appFotoFallback
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 [src]="fotoPrincipal().src"
                 [alt]="fotoPrincipal().alt"
@@ -132,7 +162,12 @@
                         : 'opacity-80 hover:opacity-100 hover:scale-95'
                     "
                   >
-                    <img class="w-full h-full object-cover" [src]="f.src" [alt]="f.alt" />
+                    <img
+                      appFotoFallback
+                      class="w-full h-full object-cover"
+                      [src]="f.src"
+                      [alt]="f.alt"
+                    />
                   </button>
                 }
               </div>
@@ -260,20 +295,27 @@
             <div
               class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md"
             >
-              <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Evaluada en el hogar de acogida temporal con pruebas de socialización y estímulos
-                urbanos de Huancayo:
-              </p>
-              <div class="flex flex-wrap gap-2.5">
-                @for (r of rasgos(); track r.texto) {
-                  <span [class]="r.clase">
-                    <span class="material-symbols-outlined text-base" [class]="r.iconoClase">{{
-                      r.icono
-                    }}</span>
-                    {{ r.texto }}
-                  </span>
-                }
-              </div>
+              @if (rasgos().length > 0) {
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Evaluada en el hogar de acogida temporal con pruebas de socialización y estímulos
+                  urbanos de Huancayo:
+                </p>
+                <div class="flex flex-wrap gap-2.5">
+                  @for (r of rasgos(); track r.texto) {
+                    <span [class]="r.clase">
+                      <span class="material-symbols-outlined text-base" [class]="r.iconoClase">{{
+                        r.icono
+                      }}</span>
+                      {{ r.texto }}
+                    </span>
+                  }
+                </div>
+              } @else {
+                <p class="font-body-sm text-body-sm text-on-surface-variant italic">
+                  Temperamento pendiente de evaluación. El refugio todavía no ha registrado rasgos
+                  individuales verificados para {{ m.nombre }}.
+                </p>
+              }
             </div>
           </section>
 
@@ -410,17 +452,6 @@
               </button>
             </div>
 
-            <div
-              class="flex items-center justify-center gap-2 text-on-surface-variant font-label-sm text-label-sm pt-2"
-            >
-              <span class="material-symbols-outlined text-primary text-base"
-                >volunteer_activism</span
-              >
-              <span
-                ><strong class="text-on-surface font-bold">{{ favoritos() }} personas</strong>
-                guardaron a {{ m.nombre }} en su lista</span
-              >
-            </div>
           </div>
 
           @if (refugio(); as r) {
@@ -480,7 +511,7 @@
                     r.adoptadas
                   }}</span>
                   <span class="font-label-sm text-label-sm text-on-surface-variant block"
-                    >Mascotas Adoptadas</span
+                    >Adopciones reportadas por el refugio</span
                   >
                 </div>
                 <div class="p-space-sm rounded-lg bg-surface-container">
@@ -488,7 +519,7 @@
                     r.enAcogida
                   }}</span>
                   <span class="font-label-sm text-label-sm text-on-surface-variant block"
-                    >En Acogida Actual</span
+                    >En acogida reportada por el refugio</span
                   >
                 </div>
               </div>
@@ -583,6 +614,7 @@
             >
               <div class="relative aspect-[4/3] w-full bg-surface-container overflow-hidden">
                 <img
+                  appFotoFallback
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   [src]="s.foto"
                   [alt]="s.alt"
@@ -682,80 +714,49 @@
             </div>
 
             <form class="flex flex-col gap-space-md" (submit)="enviarSolicitud($event)">
+              <!-- A-12: el perfil ya registrado se muestra, no se vuelve a pedir;
+                   el mensaje es el único campo libre que acepta el contrato. -->
+              @if (perfil(); as usuario) {
+                <div class="rounded-xl bg-surface-container-low p-space-md flex flex-col gap-1">
+                  <p class="font-label-md text-label-md text-on-surface font-bold">
+                    Postulando como {{ usuario.nombre }}
+                  </p>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    {{ usuario.email }}
+                    @if (usuario.distrito) {
+                      • {{ usuario.distrito }}
+                    }
+                    @if (usuario.telefono) {
+                      • {{ usuario.telefono }}
+                    }
+                  </p>
+                  <a
+                    routerLink="/login"
+                    class="font-label-sm text-label-sm text-primary underline self-start"
+                    >Actualizar mis datos</a
+                  >
+                </div>
+              } @else {
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Inicia sesión para postular. Tus datos de contacto se toman de tu perfil.
+                </p>
+              }
+
               <div class="flex flex-col gap-1">
                 <label
                   class="font-label-md text-label-md text-on-surface font-semibold"
-                  for="adopt-name"
-                  >Nombres y Apellidos</label
+                  for="adopt-message"
+                  >Mensaje para el refugio (opcional)</label
                 >
-                <input
-                  id="adopt-name"
-                  type="text"
-                  required
-                  placeholder="Ej. Carmen Quispe Mallqui"
-                  class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
-                <div class="flex flex-col gap-1">
-                  <label
-                    class="font-label-md text-label-md text-on-surface font-semibold"
-                    for="adopt-phone"
-                    >Celular (WhatsApp)</label
-                  >
-                  <input
-                    id="adopt-phone"
-                    type="tel"
-                    required
-                    placeholder="964 123 456"
-                    class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <div class="flex flex-col gap-1">
-                  <label
-                    class="font-label-md text-label-md text-on-surface font-semibold"
-                    for="adopt-district"
-                    >Distrito en Junín</label
-                  >
-                  <select
-                    id="adopt-district"
-                    class="h-[52px] px-4 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    <option value="el-tambo">El Tambo</option>
-                    <option value="huancayo">Huancayo Centro</option>
-                    <option value="chilca">Chilca</option>
-                    <option value="pilcomayo">Pilcomayo</option>
-                    <option value="san-jeronimo">San Jerónimo de Tunán</option>
-                    <option value="otro">Otro distrito del Valle</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-1">
-                <span class="font-label-md text-label-md text-on-surface font-semibold"
-                  >¿Qué tipo de vivienda tienes?</span
-                >
-                <div class="grid grid-cols-2 gap-2 text-label-md font-label-md">
-                  <label
-                    class="flex items-center gap-2 p-3 bg-surface-container-low rounded-xl cursor-pointer"
-                  >
-                    <input
-                      type="radio"
-                      name="housing"
-                      value="casa"
-                      checked
-                      class="accent-primary"
-                    />
-                    <span>Casa propia con patio</span>
-                  </label>
-                  <label
-                    class="flex items-center gap-2 p-3 bg-surface-container-low rounded-xl cursor-pointer"
-                  >
-                    <input type="radio" name="housing" value="dpto" class="accent-primary" />
-                    <span>Departamento pet-friendly</span>
-                  </label>
-                </div>
+                <textarea
+                  id="adopt-message"
+                  rows="3"
+                  maxlength="500"
+                  [value]="mensajeSolicitud()"
+                  (input)="mensajeSolicitud.set($any($event.target).value)"
+                  placeholder="Cuéntanos brevemente por qué quieres adoptar a {{ m.nombre }}"
+                  class="p-3 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary"
+                ></textarea>
               </div>
 
               <div class="flex items-start gap-2 pt-1">
@@ -776,7 +777,8 @@
                 </button>
                 <button
                   type="submit"
-                  class="flex-1 min-h-[48px] rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-md active:scale-95 transition-all"
+                  [disabled]="enviandoSolicitud()"
+                  class="flex-1 min-h-[48px] rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-md active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   Enviar Solicitud
                 </button>

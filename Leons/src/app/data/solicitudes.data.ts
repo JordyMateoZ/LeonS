@@ -1,4 +1,4 @@
-export type EstadoSolicitud = 'active' | 'completed';
+export type EstadoSolicitud = 'active' | 'completed' | 'cancelled';
 
 export interface Etapa {
   titulo: string;
@@ -56,6 +56,7 @@ export interface Solicitud {
   tiempoRespuesta?: string;
   whatsapp?: string;
   cierre?: Cierre;
+  motivoCancelacion?: string;
 }
 
 export const HEADER_SOLICITUD_ACTIVA =

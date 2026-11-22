@@ -1,6 +1,8 @@
 import { Component, OnDestroy, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../core/auth/auth.service';
+import { ApiError } from '../../core/api/api-error';
 
 type Modo = 'register' | 'login';
 type Rol = 'adopter' | 'shelter';
@@ -37,13 +39,9 @@ export class Login implements OnDestroy {
   readonly fill0 = "'FILL' 0";
   readonly fill1 = "'FILL' 1";
 
-  /**
-   * Para habilitar Google real hay que configurar un Client ID de Google Cloud
-   * y validar el token en un backend. Mientras no exista esa configuración,
-   * el botón muestra un aviso en lugar de fingir una sesión autenticada.
-   */
-  private readonly googleClientId = '';
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
   private mensajeTimer?: ReturnType<typeof setTimeout>;
 
   // Estado interactivo
@@ -54,6 +52,7 @@ export class Login implements OnDestroy {
   verClaveLogin = signal(false);
   aceptaTerminos = signal(false);
   mensaje = signal('');
+  cargando = signal(false);
 
   // Fortaleza de la contraseña (misma lógica del script de Stitch)
   readonly fortaleza = computed(() => {
@@ -138,6 +137,12 @@ export class Login implements OnDestroy {
   }
 
   elegirRol(r: Rol) {
+    if (r === 'shelter') {
+      this.avisar(
+        'El registro de refugios o rescatistas está temporalmente no disponible. Por ahora puedes registrarte como adoptante.',
+      );
+      return;
+    }
     this.rol.set(r);
   }
 
@@ -151,6 +156,15 @@ export class Login implements OnDestroy {
 
   registrar(e: Event) {
     e.preventDefault();
+    if (this.cargando()) {
+      return;
+    }
+    if (this.rol() === 'shelter') {
+      this.avisar(
+        'El registro de refugios o rescatistas está temporalmente no disponible. Por ahora puedes registrarte como adoptante.',
+      );
+      return;
+    }
     if (!this.aceptaTerminos()) {
       this.avisar('Debes aceptar el Compromiso de Bienestar Animal para crear tu cuenta.');
       return;
@@ -159,20 +173,81 @@ export class Login implements OnDestroy {
       this.avisar('La contraseña debe tener al menos 8 caracteres.');
       return;
     }
-    this.avisar('¡Cuenta de ejemplo creada! Cuando conectemos la API podrás iniciar sesión.');
+
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+    const nombre = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const dni = String(data.get('dni') ?? '').trim();
+    const telefono = String(data.get('phone') ?? '').trim();
+    const password = this.clave();
+    const distritoSlug = String(data.get('district') ?? '');
+    const distrito = this.distritos.find((d) => d.valor === distritoSlug)?.nombre ?? null;
+    const rol = 'adoptante';
+
+    if (!nombre || !email) {
+      this.avisar('Completa tu nombre y correo para crear la cuenta.');
+      return;
+    }
+    if (!/^\d{8}$/.test(dni)) {
+      this.avisar('Ingresa un DNI válido de 8 dígitos.');
+      return;
+    }
+
+    this.cargando.set(true);
+    this.authService
+      .registrar({
+        nombre,
+        email,
+        dni,
+        password,
+        telefono: telefono || null,
+        distrito,
+        rol,
+        refugioId: null,
+      })
+      .subscribe({
+        next: () => {
+          this.cargando.set(false);
+          this.avisar('¡Cuenta creada! Bienvenido a LeonS.');
+          void this.router.navigateByUrl('/mis-solicitudes');
+        },
+        error: (error: unknown) => {
+          this.cargando.set(false);
+          this.avisar(this.mensajeDeError(error));
+        },
+      });
   }
 
   ingresar(e: Event) {
     e.preventDefault();
-    this.avisar('Inicio de sesión de ejemplo. La autenticación real se habilitará al conectar la API.');
-  }
-
-  google() {
-    if (!this.googleClientId) {
-      this.avisar('El acceso con Google aún no está configurado. Por ahora usa el formulario de LeonS.');
+    if (this.cargando()) {
       return;
     }
-    this.avisar('Google OAuth está configurado, pero falta conectar la validación del token en el backend.');
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+    const identificador = String(data.get('username') ?? '').trim();
+    const password = String(data.get('password') ?? '');
+
+    if (!identificador || !password) {
+      this.avisar('Ingresa tu correo/DNI y contraseña.');
+      return;
+    }
+
+    this.cargando.set(true);
+    this.authService
+      .login({ identificador, password })
+      .subscribe({
+        next: () => {
+          this.cargando.set(false);
+          this.avisar('¡Bienvenido a LeonS!');
+          void this.router.navigateByUrl('/mis-solicitudes');
+        },
+        error: (error: unknown) => {
+          this.cargando.set(false);
+          this.avisar(this.mensajeDeError(error));
+        },
+      });
   }
 
   recuperarClave() {
@@ -191,6 +266,13 @@ export class Login implements OnDestroy {
     if (this.mensajeTimer) {
       clearTimeout(this.mensajeTimer);
     }
+  }
+
+  private mensajeDeError(error: unknown): string {
+    if (error instanceof ApiError) {
+      return error.message || 'No se pudo completar la operación.';
+    }
+    return 'No se pudo conectar con el servidor. Intenta de nuevo.';
   }
 
   private avisar(texto: string) {

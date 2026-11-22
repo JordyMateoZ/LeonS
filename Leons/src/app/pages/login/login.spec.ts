@@ -33,9 +33,22 @@ describe('Login', () => {
     expect(fixture.nativeElement.textContent).toContain('¡Bienvenido de vuelta a LeonS!');
   });
 
-  it('should show a message when Google OAuth is not configured', () => {
-    component.google();
-    expect(component.mensaje()).toContain('Google');
+  it('should not offer Google sign-in on the register tab', () => {
+    const text = fixture.nativeElement.textContent as string;
+
+    expect(text).not.toContain('Continuar con Google');
+    expect(text.toLowerCase()).not.toContain('o regístrate con');
+  });
+
+  it('should not offer Google sign-in on the login tab', async () => {
+    component.cambiarModo('login');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const text = fixture.nativeElement.textContent as string;
+
+    expect(text).not.toContain('Acceder con Google');
+    expect(text.toLowerCase()).not.toContain('o ingresa con');
   });
 
   it('should block registration without accepting the terms', () => {
@@ -44,5 +57,16 @@ describe('Login', () => {
     component.registrar(new Event('submit'));
 
     expect(component.mensaje()).toContain('Compromiso de Bienestar Animal');
+  });
+
+  it('keeps shelter registration disabled with an explicit message', () => {
+    component.elegirRol('shelter');
+    fixture.detectChanges();
+
+    expect(component.rol()).toBe('adopter');
+    expect(component.mensaje()).toContain('temporalmente no disponible');
+    expect(fixture.nativeElement.textContent).toContain(
+      'El registro de refugios o rescatistas está temporalmente no disponible',
+    );
   });
 });

@@ -32,6 +32,14 @@ describe('Refugios', () => {
     expect(component.estadisticas().map((e) => e.valor)).toEqual(['9', '702', '96', '6']);
   });
 
+  it('identifica 702 y 96 como cifras reportadas por los refugios', () => {
+    const textos = component.estadisticas().map((e) => e.texto);
+
+    expect(textos).toContain('Adopciones acumuladas reportadas por los refugios');
+    expect(textos).toContain('Mascotas en acogida reportadas por los refugios');
+    expect(fixture.nativeElement.textContent).toContain('adopciones reportadas por el refugio');
+  });
+
   it('should group the coverage by the 6 real districts', () => {
     expect(component.cobertura().length).toBe(6);
     const aliados = component

@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { EstadisticasService } from '../../services/estadisticas.service';
 import { MascotasService } from '../../services/mascotas.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { MascotasService } from '../../services/mascotas.service';
 })
 export class Impacto {
   private readonly mascotasService = inject(MascotasService);
+  private readonly estadisticasService = inject(EstadisticasService);
   private readonly document = inject(DOCUMENT);
 
   readonly whatsappShareUrl =
@@ -20,16 +22,32 @@ export class Impacto {
 
   readonly volunteerNotice = signal(false);
 
-  readonly totalAdoptadas = computed(() => this.mascotasService.totalAdoptadas);
-  readonly totalRefugios = computed(() => this.mascotasService.refugios.length);
-  readonly totalEnAcogida = computed(() => this.mascotasService.totalEnAcogida);
-  readonly totalDistritos = computed(() => this.mascotasService.totalDistritos);
-  readonly totalMascotas = computed(() => this.mascotasService.total);
+  readonly impactoReal = computed(() => this.estadisticasService.impacto());
+
+  readonly totalAdoptadas = computed(
+    () => this.impactoReal()?.totalAdoptadas ?? this.mascotasService.totalAdoptadas,
+  );
+  readonly totalRefugios = computed(
+    () => this.impactoReal()?.totalRefugios ?? this.mascotasService.refugios.length,
+  );
+  readonly totalEnAcogida = computed(
+    () => this.impactoReal()?.totalEnAcogida ?? this.mascotasService.totalEnAcogida,
+  );
+  readonly totalDistritos = computed(
+    () => this.impactoReal()?.totalDistritos ?? this.mascotasService.totalDistritos,
+  );
+  readonly totalMascotas = computed(
+    () => this.impactoReal()?.totalMascotas ?? this.mascotasService.total,
+  );
   readonly totalPerros = computed(
-    () => this.mascotasService.mascotas.filter((mascota) => mascota.especie === 'perro').length,
+    () =>
+      this.impactoReal()?.totalPerros ??
+      this.mascotasService.mascotas.filter((mascota) => mascota.especie === 'perro').length,
   );
   readonly totalGatos = computed(
-    () => this.mascotasService.mascotas.filter((mascota) => mascota.especie === 'gato').length,
+    () =>
+      this.impactoReal()?.totalGatos ??
+      this.mascotasService.mascotas.filter((mascota) => mascota.especie === 'gato').length,
   );
 
   toggleVolunteerNotice() {
@@ -50,8 +68,8 @@ export class Impacto {
       chipClass: 'text-secondary bg-secondary-container/40 font-bold',
       value: `${this.totalAdoptadas()}`,
       valueColor: 'text-primary',
-      title: 'Mascotas adoptadas',
-      text: 'Hogares cálidos formados en Junín con seguimiento integral.',
+      title: 'Adopciones acumuladas reportadas por los refugios',
+      text: 'No equivale a las adopciones registradas en LeonS.',
       footIcon: 'volunteer_activism',
       footLabel: 'Segundas oportunidades reales',
       footColor: 'text-primary',
@@ -78,8 +96,8 @@ export class Impacto {
       chipClass: 'text-primary bg-primary-fixed/60 font-bold',
       value: `${this.totalEnAcogida()}`,
       valueColor: 'text-primary-container',
-      title: 'Mascotas en acogida',
-      text: 'Peluditos que esperan una familia definitiva en la red.',
+      title: 'Mascotas en acogida reportadas por los refugios',
+      text: 'Distinto de la acogida registrada en LeonS.',
       footIcon: 'family_restroom',
       footLabel: 'Acompañamiento temporal',
       footColor: 'text-on-surface-variant',

@@ -1,50 +1,95 @@
+import { WritableSignal, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { Header } from './header';
+import { vi } from 'vitest';
 
-const STORAGE_KEY = 'leons.solicitudes.v1';
+import { AuthService, EstadoSesion } from '../../core/auth/auth.service';
+import { SolicitudesService } from '../../services/solicitudes.service';
+import { Header } from './header';
 
 describe('Header', () => {
   let component: Header;
   let fixture: ComponentFixture<Header>;
+  let estado: WritableSignal<EstadoSesion>;
+  let cerrarSesion: ReturnType<typeof vi.fn>;
 
-  beforeEach(async () => {
-    localStorage.removeItem(STORAGE_KEY);
-
+  async function configurar(estadoInicial: EstadoSesion) {
+    estado = signal<EstadoSesion>(estadoInicial);
+    cerrarSesion = vi.fn(() => estado.set('no-autenticada'));
     await TestBed.configureTestingModule({
       imports: [Header],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthenticated: () => estado() === 'confirmada',
+            sesionPendiente: () => estado() === 'pendiente',
+            usuario: signal(null).asReadonly(),
+            cerrarSesion,
+          },
+        },
+        {
+          provide: SolicitudesService,
+          useValue: {
+            activas: signal(0).asReadonly(),
+            limpiarPrivados: vi.fn(),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
     await fixture.whenStable();
-  });
+  }
 
   afterEach(() => {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('leons.token.v1');
   });
 
-  it('should create', () => {
+  it('should create', async () => {
+    await configurar('no-autenticada');
     expect(component).toBeTruthy();
   });
 
-  it('should show a labelled access to Mis Solicitudes', () => {
-    const enlace = fixture.nativeElement.querySelector(
-      'a[href="/mis-solicitudes"]',
-    ) as HTMLAnchorElement;
+  it('muestra acceso público y oculta datos privados sin sesión', async () => {
+    await configurar('no-autenticada');
+    const html = fixture.nativeElement as HTMLElement;
 
-    expect(enlace).toBeTruthy();
-    expect(enlace.textContent).toContain('Mis solicitudes');
-    expect(enlace.getAttribute('aria-label')).toContain('2 activas');
+    expect(html.textContent).toContain('Iniciar sesión');
+    expect(html.querySelector('a[href="/mis-solicitudes"]')).toBeNull();
+    expect(html.querySelector('[data-accion="cerrar-sesion"]')).toBeNull();
   });
 
-  it('should show the badge with the active requests count', () => {
-    expect(component.activas()).toBe(2);
-    const enlace = fixture.nativeElement.querySelector(
-      'a[href="/mis-solicitudes"]',
-    ) as HTMLAnchorElement;
+  it('muestra Mis solicitudes y un cierre de sesión visible con sesión confirmada', async () => {
+    await configurar('confirmada');
+    const html = fixture.nativeElement as HTMLElement;
 
-    expect(enlace.textContent).toContain('2');
+    expect(html.querySelector('a[href="/mis-solicitudes"]')).toBeTruthy();
+    expect(html.textContent).toContain('Cerrar sesión');
+    expect(html.querySelector('[data-accion="cerrar-sesion"]')).toBeTruthy();
+    expect(html.textContent).not.toContain('Iniciar sesión');
+  });
+
+  it('cierra la sesión al pulsar el botón', async () => {
+    await configurar('confirmada');
+    const boton = fixture.nativeElement.querySelector(
+      '[data-accion="cerrar-sesion"]',
+    ) as HTMLButtonElement;
+
+    boton.click();
+    await fixture.whenStable();
+
+    expect(cerrarSesion).toHaveBeenCalledTimes(1);
+  });
+
+  it('no muestra datos privados mientras la sesión está pendiente', async () => {
+    await configurar('pendiente');
+    const html = fixture.nativeElement as HTMLElement;
+
+    expect(html.querySelector('a[href="/mis-solicitudes"]')).toBeNull();
+    expect(html.querySelector('[data-accion="cerrar-sesion"]')).toBeNull();
+    expect(html.textContent).toContain('Verificando sesión');
   });
 });

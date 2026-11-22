@@ -1,0 +1,484 @@
+{
+  "run_id": "e2e20261120210650q3nq",
+  "creado_en": "2026-11-21T02:06:51.990078+00:00",
+  "db_pruebas": "LeonsDB_Test",
+  "db_principal": "LeonsDB",
+  "status": "closed",
+  "baseline": {
+    "migraciones": {
+      "count": 0,
+      "hash": "e3b0c44298fc1c149afb"
+    },
+    "usuarios": {
+      "count": 3,
+      "hash": "facc29c923844fb07e8f"
+    },
+    "refugios": {
+      "count": 9,
+      "hash": "dbae895a3d9cff81f1fc"
+    },
+    "refugio_especies": {
+      "count": 15,
+      "hash": "b9709a82f3301517fdfd"
+    },
+    "mascotas": {
+      "count": 16,
+      "hash": "f4b03dc471ca96b33d72"
+    },
+    "mascota_salud": {
+      "count": 33,
+      "hash": "598ac9aee2c4633e4638"
+    },
+    "mascota_fotos": {
+      "count": 5,
+      "hash": "c6f9917a359d3b646523"
+    },
+    "mascota_rasgos": {
+      "count": 6,
+      "hash": "fa12504ef24ad50b0146"
+    },
+    "mascota_historia": {
+      "count": 48,
+      "hash": "05c756d63288147134e1"
+    },
+    "mascota_cuidados": {
+      "count": 49,
+      "hash": "035ca3c84d079c52801a"
+    },
+    "solicitudes": {
+      "count": 74,
+      "hash": "86fbec42a5e3a791eb03"
+    },
+    "solicitud_eventos": {
+      "count": 74,
+      "hash": "07a9f38b99b4b83ac9b8"
+    },
+    "citas": {
+      "count": 1,
+      "hash": "84361d64875154d762dd"
+    },
+    "mensajes": {
+      "count": 72,
+      "hash": "447d95d5ae2c50d387e7"
+    },
+    "seguimiento_fotos": {
+      "count": 0,
+      "hash": "e3b0c44298fc1c149afb"
+    },
+    "favoritos": {
+      "count": 0,
+      "hash": "e3b0c44298fc1c149afb"
+    },
+    "alertas_rescate": {
+      "count": 71,
+      "hash": "c8bed539e0338a0d71c9"
+    },
+    "contenido_pasos": {
+      "count": 11,
+      "hash": "9a3c9ea008f7c34e5087"
+    },
+    "contenido_faqs": {
+      "count": 6,
+      "hash": "864cff2b07a44c7e1ed5"
+    },
+    "distritos": {
+      "count": 6,
+      "hash": "f188e39f296221909d69"
+    },
+    "alembic": "0009"
+  },
+  "baseline_principal_counts": {
+    "migraciones": 0,
+    "usuarios": 3,
+    "refugios": 9,
+    "refugio_especies": 15,
+    "mascotas": 16,
+    "mascota_salud": 33,
+    "mascota_fotos": 5,
+    "mascota_rasgos": 6,
+    "mascota_historia": 48,
+    "mascota_cuidados": 49,
+    "solicitudes": 3,
+    "solicitud_eventos": 3,
+    "citas": 1,
+    "mensajes": 1,
+    "seguimiento_fotos": 0,
+    "favoritos": 0,
+    "alertas_rescate": 0,
+    "contenido_pasos": 11,
+    "contenido_faqs": 6,
+    "distritos": 6
+  },
+  "baseline_distrito_ids": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "guards": [
+    {
+      "operacion": "beforeAll:identificadores",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:06:53.013649+00:00"
+    },
+    {
+      "operacion": "create-role-users",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:06:55.366757+00:00"
+    },
+    {
+      "operacion": "create-mascota",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:06:57.384581+00:00"
+    },
+    {
+      "operacion": "create-mascota",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:06:59.042048+00:00"
+    },
+    {
+      "operacion": "create-mascota",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:00.724810+00:00"
+    },
+    {
+      "operacion": "create-mascota",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:02.374731+00:00"
+    },
+    {
+      "operacion": "create-adoptantes",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:04.026822+00:00"
+    },
+    {
+      "operacion": "A1:registro-publico",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:09.412338+00:00"
+    },
+    {
+      "operacion": "track-distritos",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:11.871241+00:00"
+    },
+    {
+      "operacion": "A2:sesion-ui",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:14.716710+00:00"
+    },
+    {
+      "operacion": "A2:catalogo",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:16.711050+00:00"
+    },
+    {
+      "operacion": "A2:favorito",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:17.797401+00:00"
+    },
+    {
+      "operacion": "A2:doble-envio",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:19.787471+00:00"
+    },
+    {
+      "operacion": "track-solicitudes",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:21.272265+00:00"
+    },
+    {
+      "operacion": "A3:sesion-ui",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:24.185159+00:00"
+    },
+    {
+      "operacion": "A3:post-fallido",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:27.269818+00:00"
+    },
+    {
+      "operacion": "track-solicitudes",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:28.456554+00:00"
+    },
+    {
+      "operacion": "A4:sesion-ui",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:31.063979+00:00"
+    },
+    {
+      "operacion": "B1:crear-solicitudes",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:34.802632+00:00"
+    },
+    {
+      "operacion": "track-solicitudes",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:35.921224+00:00"
+    },
+    {
+      "operacion": "B1:mensajes",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:37.579995+00:00"
+    },
+    {
+      "operacion": "B1:cita-invalida",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:39.300293+00:00"
+    },
+    {
+      "operacion": "B1:cita-valida",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:41.623703+00:00"
+    },
+    {
+      "operacion": "B1:etapa",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:43.384462+00:00"
+    },
+    {
+      "operacion": "B2:autorizacion",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:46.015609+00:00"
+    },
+    {
+      "operacion": "B2:otras-activas",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:47.111605+00:00"
+    },
+    {
+      "operacion": "B2:cancelacion-no-autorizada",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:49.081015+00:00"
+    },
+    {
+      "operacion": "B2:cancelacion-autorizada",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:50.107249+00:00"
+    },
+    {
+      "operacion": "B2:concurrencia",
+      "db": "LeonsDB_Test",
+      "en": "2026-11-21T02:07:51.845002+00:00"
+    }
+  ],
+  "records": {
+    "users": [
+      {
+        "id": 113,
+        "email": "e2e-01a0957e18fe@example.com",
+        "rol": "refugio"
+      },
+      {
+        "id": 114,
+        "email": "e2e-bf8a9fb761af@example.com",
+        "rol": "admin"
+      },
+      {
+        "id": 115,
+        "email": "e2e-dd8ec52feec1@example.com",
+        "rol": "adoptante"
+      },
+      {
+        "id": 116,
+        "email": "e2e-8e7a2907a356@example.com",
+        "rol": "adoptante"
+      },
+      {
+        "id": 117,
+        "email": "e2e-5bd4bde6fe65@example.com",
+        "rol": "adoptante"
+      },
+      {
+        "id": 118,
+        "email": "e2e-0890cf34f9ca@example.com",
+        "rol": "adoptante"
+      }
+    ],
+    "mascotas": [
+      {
+        "id": 89,
+        "nombre": "E2E-50q3nq-UI",
+        "refugio_id": "mantaro-solidario",
+        "source_id": 3
+      },
+      {
+        "id": 90,
+        "nombre": "E2E-50q3nq-Fallo",
+        "refugio_id": "mantaro-solidario",
+        "source_id": 3
+      },
+      {
+        "id": 91,
+        "nombre": "E2E-50q3nq-API",
+        "refugio_id": "mantaro-solidario",
+        "source_id": 3
+      },
+      {
+        "id": 92,
+        "nombre": "E2E-50q3nq-Aislamiento",
+        "refugio_id": "mantaro-solidario",
+        "source_id": 3
+      }
+    ],
+    "solicitudes": [
+      {
+        "id": 170,
+        "codigo": "#SOL-HYO-2026-170",
+        "usuario_id": 115,
+        "mascota_id": 89,
+        "estado_inicial": "activa"
+      },
+      {
+        "id": 171,
+        "codigo": "#SOL-HYO-2026-171",
+        "usuario_id": 115,
+        "mascota_id": 91,
+        "estado_inicial": "activa"
+      },
+      {
+        "id": 172,
+        "codigo": "#SOL-HYO-2026-172",
+        "usuario_id": 116,
+        "mascota_id": 91,
+        "estado_inicial": "activa"
+      },
+      {
+        "id": 173,
+        "codigo": "#SOL-HYO-2026-173",
+        "usuario_id": 117,
+        "mascota_id": 91,
+        "estado_inicial": "activa"
+      }
+    ]
+  },
+  "cleanup": {
+    "en": "2026-11-21T02:07:53.359673+00:00",
+    "db": "LeonsDB_Test",
+    "borrados": {
+      "seguimiento_fotos": 0,
+      "citas": 1,
+      "mensajes": 8,
+      "solicitud_eventos": 5,
+      "mascota_salud": 8,
+      "mascota_fotos": 0,
+      "mascota_rasgos": 0,
+      "mascota_historia": 12,
+      "mascota_cuidados": 12,
+      "favoritos": 1,
+      "solicitudes": 4,
+      "mascotas": 4,
+      "usuarios": 6
+    },
+    "archivos_borrados": 0,
+    "coincide_con_baseline": true,
+    "leonsdb_intacta": true,
+    "final": {
+      "migraciones": {
+        "count": 0,
+        "hash": "e3b0c44298fc1c149afb"
+      },
+      "usuarios": {
+        "count": 3,
+        "hash": "facc29c923844fb07e8f"
+      },
+      "refugios": {
+        "count": 9,
+        "hash": "dbae895a3d9cff81f1fc"
+      },
+      "refugio_especies": {
+        "count": 15,
+        "hash": "b9709a82f3301517fdfd"
+      },
+      "mascotas": {
+        "count": 16,
+        "hash": "f4b03dc471ca96b33d72"
+      },
+      "mascota_salud": {
+        "count": 33,
+        "hash": "598ac9aee2c4633e4638"
+      },
+      "mascota_fotos": {
+        "count": 5,
+        "hash": "c6f9917a359d3b646523"
+      },
+      "mascota_rasgos": {
+        "count": 6,
+        "hash": "fa12504ef24ad50b0146"
+      },
+      "mascota_historia": {
+        "count": 48,
+        "hash": "05c756d63288147134e1"
+      },
+      "mascota_cuidados": {
+        "count": 49,
+        "hash": "035ca3c84d079c52801a"
+      },
+      "solicitudes": {
+        "count": 74,
+        "hash": "86fbec42a5e3a791eb03"
+      },
+      "solicitud_eventos": {
+        "count": 74,
+        "hash": "07a9f38b99b4b83ac9b8"
+      },
+      "citas": {
+        "count": 1,
+        "hash": "84361d64875154d762dd"
+      },
+      "mensajes": {
+        "count": 72,
+        "hash": "447d95d5ae2c50d387e7"
+      },
+      "seguimiento_fotos": {
+        "count": 0,
+        "hash": "e3b0c44298fc1c149afb"
+      },
+      "favoritos": {
+        "count": 0,
+        "hash": "e3b0c44298fc1c149afb"
+      },
+      "alertas_rescate": {
+        "count": 71,
+        "hash": "c8bed539e0338a0d71c9"
+      },
+      "contenido_pasos": {
+        "count": 11,
+        "hash": "9a3c9ea008f7c34e5087"
+      },
+      "contenido_faqs": {
+        "count": 6,
+        "hash": "864cff2b07a44c7e1ed5"
+      },
+      "distritos": {
+        "count": 6,
+        "hash": "f188e39f296221909d69"
+      },
+      "alembic": "0009"
+    },
+    "final_principal_counts": {
+      "migraciones": 0,
+      "usuarios": 3,
+      "refugios": 9,
+      "refugio_especies": 15,
+      "mascotas": 16,
+      "mascota_salud": 33,
+      "mascota_fotos": 5,
+      "mascota_rasgos": 6,
+      "mascota_historia": 48,
+      "mascota_cuidados": 49,
+      "solicitudes": 3,
+      "solicitud_eventos": 3,
+      "citas": 1,
+      "mensajes": 1,
+      "seguimiento_fotos": 0,
+      "favoritos": 0,
+      "alertas_rescate": 0,
+      "contenido_pasos": 11,
+      "contenido_faqs": 6,
+      "distritos": 6
+    }
+  }
+}

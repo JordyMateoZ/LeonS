@@ -37,6 +37,17 @@ describe('DetalleRefugio', () => {
     expect(component.whatsappUrl()).toContain('wa.me/51964123456');
   });
 
+  it('etiqueta los conteos del catálogo como registros de LeonS', async () => {
+    const { component, fixture } = crearComponente('huellitas-wanka');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const texto = fixture.nativeElement.textContent;
+    expect(texto).toContain('Adopciones registradas en LeonS');
+    expect(texto).toContain('Mascotas en acogida registradas en LeonS');
+    expect(component.resumen().adoptadas).toBe(0);
+  });
+
   it('should list the pets of each refugio without mixing them', async () => {
     const { component, fixture } = crearComponente('hogar-san-roque');
     await fixture.whenStable();
